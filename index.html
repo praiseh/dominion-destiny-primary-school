@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Dominion Destiny Primary School</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --primary:       #c8102e;
+  --primary-dark:  #9c0c24;
+  --primary-light: #fce8ec;
+  --accent:        #1a2639;
+  --text:          #1a2639;
+  --text-muted:    #6b7280;
+  --white:         #ffffff;
+  --bg-light:      #f8f9fa;
+  --bg-section:    #f1f3f6;
+  --border:        #e5e7eb;
+  --shadow:        0 4px 20px rgba(0,0,0,0.08);
+  --shadow-md:     0 8px 32px rgba(0,0,0,0.12);
+  --radius:        12px;
+  --radius-lg:     20px;
+  --heading-font:  'Cormorant Garamond', Georgia, serif;
+  --body-font:     'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  font-family: var(--body-font);
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font);
+  letter-spacing: -0.01em;
+}
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; }
+
+/* ===== UTILITIES ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 80px 0; }
+.section-alt { background: var(--bg-section); }
+.text-primary { color: var(--primary); }
+.text-center { text-align: center; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 28px; border-radius: 6px;
+  font-weight: 600; font-size: 0.9rem;
+  cursor: pointer; border: none;
+  transition: all 0.25s ease;
+  font-family: var(--body-font);
+  letter-spacing: 0.02em;
+}
+.btn-primary { background: var(--primary); color: var(--white); }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,16,46,0.35); }
+.btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+.btn-outline:hover { background: var(--primary); color: var(--white); }
+
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--primary-light); color: var(--primary);
+  padding: 6px 18px; border-radius: 50px;
+  font-size: 0.78rem; font-weight: 600;
+  font-family: var(--body-font);
+  border: 1px solid rgba(200,16,46,0.2); margin-bottom: 12px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+.section-heading {
+  font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+  font-weight: 700; color: var(--text);
+  line-height: 1.2; margin-bottom: 12px;
+}
+.section-subtext { color: var(--text-muted); font-size: 0.95rem; line-height: 1.75; max-width: 560px; }
+
+.divider { display: flex; gap: 8px; margin: 12px 0 24px; }
+.divider span { height: 3px; background: var(--primary); border-radius: 2px; }
+.divider span:first-child { width: 40px; }
+.divider span:nth-child(2) { width: 70px; }
+.divider span:last-child { width: 24px; }
+.divider.center { justify-content: center; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+
+.card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); box-shadow: var(--shadow);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+
+/* ===== TOPBAR ===== */
+.topbar { background: var(--accent); color: rgba(255,255,255,0.85); font-size: 0.82rem; padding: 9px 0; }
+.topbar .container { display: flex; justify-content: space-between; align-items: center; }
+.topbar a { color: rgba(255,255,255,0.85); transition: color 0.2s; }
+.topbar a:hover { color: var(--white); }
+.topbar-left, .topbar-right { display: flex; align-items: center; gap: 20px; }
+.topbar-item { display: flex; align-items: center; gap: 6px; font-family: var(--body-font); }
+.topbar-item i { color: var(--primary); font-size: 0.75rem; }
+.social-icons { display: flex; gap: 8px; }
+.social-icons a {
+  width: 26px; height: 26px; background: rgba(255,255,255,0.1);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; transition: background 0.2s;
+}
+.social-icons a:hover { background: var(--primary); }
+
+/* ===== NAVBAR ===== */
+.navbar { background: var(--white); box-shadow: 0 2px 12px rgba(0,0,0,0.07); position: sticky; top: 0; z-index: 100; }
+.navbar .container { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; padding-bottom: 10px; }
+.navbar-brand { display: flex; align-items: center; gap: 12px; }
+.brand-logo-circle {
+  width: 46px; height: 46px; background: var(--primary);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 1.3rem; font-family: var(--heading-font); font-weight: 700;
+}
+.brand-name {
+  font-family: var(--heading-font); font-size: 1.35rem; font-weight: 700;
+  color: var(--text); line-height: 1.2;
+}
+.brand-name span { display: block; font-size: 0.72rem; font-weight: 400; color: var(--text-muted); font-family: var(--body-font); letter-spacing: 0.03em; }
+
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-links a {
+  padding: 8px 14px; border-radius: 6px;
+  font-size: 0.88rem; font-weight: 500; color: var(--text);
+  font-family: var(--body-font); transition: all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--primary); background: var(--primary-light); }
+
+.navbar-actions { display: flex; align-items: center; gap: 10px; }
+.search-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg-light); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-muted); transition: all 0.2s;
+}
+.search-btn:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+.hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(135deg, var(--accent) 0%, #2d3d55 100%);
+  min-height: 92vh; display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: url('img/hero-bg.jpg') center/cover no-repeat; opacity: 0.12;
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 420px; gap: 60px; align-items: center; position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 20px 8px 8px; border-radius: 50px; margin-bottom: 28px;
+}
+.hero-badge-dot {
+  width: 32px; height: 32px; background: var(--primary); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 0.8rem;
+}
+.hero-badge-text { color: rgba(255,255,255,0.9); font-size: 0.86rem; font-weight: 500; font-family: var(--body-font); }
+.hero-badge-year {
+  background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
+  padding: 3px 10px; border-radius: 30px; font-size: 0.8rem; font-weight: 600;
+  font-family: var(--body-font);
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 700; color: var(--white); line-height: 1.1;
+  margin-bottom: 14px; font-family: var(--heading-font);
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, #ff6b9d, #ff8a5c);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-desc { color: rgba(255,255,255,0.78); font-size: 1rem; line-height: 1.75; margin-bottom: 28px; }
+
+.hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+.hero-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+  padding: 7px 16px; border-radius: 50px;
+  color: rgba(255,255,255,0.9); font-size: 0.85rem;
+  font-family: var(--body-font);
+}
+.hero-pill i { color: #ff6b9d; font-size: 0.75rem; }
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.hero-card {
+  background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); padding: 32px;
+}
+.hero-card-icon {
+  width: 56px; height: 56px; background: var(--primary); border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 1.5rem; margin-bottom: 18px;
+}
+.hero-card h4 { color: var(--white); font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; font-family: var(--heading-font); }
+.hero-card p { color: rgba(255,255,255,0.7); font-size: 0.88rem; margin-bottom: 20px; }
+.progress-label { display: flex; justify-content: space-between; color: rgba(255,255,255,0.8); font-size: 0.82rem; margin-bottom: 6px; }
+.progress-bar { height: 8px; background: rgba(255,255,255,0.15); border-radius: 4px; overflow: hidden; margin-bottom: 20px; }
+.progress-fill { height: 100%; background: var(--primary); border-radius: 4px; }
+.hero-card-link { color: #ff6b9d; font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.hero-card-link:hover { gap: 10px; }
+
+/* ===== STATS ===== */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.stat-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); padding: 28px 20px;
+  text-align: center; box-shadow: var(--shadow); transition: transform 0.25s;
+}
+.stat-card:hover { transform: translateY(-4px); }
+.stat-icon {
+  width: 52px; height: 52px; background: var(--primary-light); border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 1.3rem; margin: 0 auto 14px;
+}
+.stat-number {
+  font-size: 2.2rem; font-weight: 700; color: var(--text);
+  font-family: var(--heading-font); line-height: 1; margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 0.78rem; color: var(--text-muted); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  font-family: var(--body-font);
+}
+
+/* ===== ABOUT ===== */
+.about-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.about-image-wrap { position: relative; aspect-ratio: 4/3; border-radius: var(--radius-lg); overflow: hidden; }
+.about-image-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about-image-badge {
+  position: absolute; bottom: -20px; right: -16px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 20px;
+  box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 12px;
+}
+.about-image-badge .icon {
+  width: 40px; height: 40px; background: var(--primary-light);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 1.1rem;
+}
+.about-image-badge .label { font-size: 0.75rem; color: var(--text-muted); font-weight: 500; }
+.about-image-badge .value { font-size: 1rem; color: var(--text); font-weight: 700; font-family: var(--heading-font); }
+
+.features-grid-2x3 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+.feature-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--bg-light); transition: all 0.2s;
+}
+.feature-row:hover { border-color: var(--primary); background: var(--primary-light); }
+.feature-row .icon {
+  width: 38px; height: 38px; background: var(--primary); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 0.95rem; flex-shrink: 0;
+}
+.feature-row h6 { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 1px; font-family: var(--body-font); }
+.feature-row small { font-size: 0.75rem; color: var(--text-muted); }
+
+/* ===== MISSION / VISION / VALUES ===== */
+.mvv-card {
+  padding: 32px 28px; border-radius: var(--radius-lg);
+  border: 1px solid var(--border); background: var(--white);
+  box-shadow: var(--shadow); transition: transform 0.25s, box-shadow 0.25s;
+}
+.mvv-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); }
+.mvv-icon {
+  width: 62px; height: 62px; border-radius: 18px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 1.6rem; margin-bottom: 20px;
+}
+.mvv-icon.mission { background: var(--primary); }
+.mvv-icon.vision  { background: #2563eb; }
+.mvv-icon.values  { background: #059669; }
+.mvv-card h3 { font-size: 1.4rem; font-weight: 700; color: var(--text); margin-bottom: 14px; }
+.mvv-card p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.78; }
+.mvv-list { display: flex; flex-direction: column; gap: 10px; }
+.mvv-list li { display: flex; align-items: center; gap: 10px; font-size: 0.93rem; color: var(--text); font-weight: 500; }
+.mvv-list li i { color: #059669; font-size: 0.9rem; }
+
+/* ===== SERVICES ===== */
+.service-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); padding: 32px 24px;
+  text-align: center; box-shadow: var(--shadow);
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--primary); transform: scaleX(0);
+  transition: transform 0.3s; transform-origin: left;
+}
+.service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  width: 80px; height: 80px; background: var(--primary-light);
+  border-radius: 22px; display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 2rem; margin: 0 auto 20px; transition: all 0.3s;
+}
+.service-card:hover .service-icon { background: var(--primary); color: var(--white); }
+.service-card h3 { font-size: 1.35rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.service-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.72; margin-bottom: 20px; }
+.service-featured-badge {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--primary); color: var(--white);
+  font-size: 0.72rem; font-weight: 600; padding: 4px 10px;
+  border-radius: 20px; font-family: var(--body-font);
+}
+
+/* ===== EVENTS ===== */
+.event-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: var(--shadow); transition: all 0.25s;
+}
+.event-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.event-card.featured { border-color: var(--primary); border-width: 2px; }
+
+.event-header {
+  padding: 20px 24px 16px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.event-category {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--primary-light); color: var(--primary);
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 600; font-family: var(--body-font);
+}
+.event-category.music  { background: #f0e6ff; color: #7c3aed; }
+.event-category.health { background: #e6f9f0; color: #059669; }
+
+.event-date-box { text-align: center; background: var(--primary-light); padding: 10px 14px; border-radius: 10px; min-width: 56px; }
+.event-date-box .day   { display: block; font-size: 1.7rem; font-weight: 700; color: var(--primary); line-height: 1; font-family: var(--heading-font); }
+.event-date-box .month { display: block; font-size: 0.72rem; font-weight: 600; color: var(--primary-dark); text-transform: uppercase; font-family: var(--body-font); }
+
+.event-body { padding: 20px 24px; }
+.event-title { font-size: 1.15rem; font-weight: 700; color: var(--text); margin-bottom: 14px; font-family: var(--heading-font); }
+.event-meta { background: var(--bg-light); border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 8px; }
+.meta-row { display: flex; align-items: center; gap: 10px; font-size: 0.84rem; color: var(--text-muted); }
+.meta-row i { color: var(--primary); width: 14px; text-align: center; font-size: 0.78rem; }
+.event-desc { font-size: 0.87rem; color: var(--text-muted); line-height: 1.68; margin-bottom: 18px; }
+
+.event-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px dashed var(--border); }
+.status-badge { font-size: 0.78rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; font-family: var(--body-font); }
+.status-available { background: #e6f9f0; color: #059669; }
+.status-limited   { background: #fff8e1; color: #b45309; }
+.featured-ribbon  {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--primary); color: var(--white);
+  padding: 5px 14px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 600; margin-bottom: 10px;
+  font-family: var(--body-font);
+}
+
+/* ===== TEAM ===== */
+.team-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: var(--shadow); transition: all 0.25s;
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.team-card.featured-leader { border-color: var(--primary); border-width: 2px; }
+.team-img { position: relative; overflow: hidden; height: 220px; }
+.team-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.team-card:hover .team-img img { transform: scale(1.06); }
+.team-social-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent, rgba(0,0,0,0.75));
+  display: flex; justify-content: center; gap: 8px;
+  padding: 20px 16px 14px; transform: translateY(60px); transition: transform 0.3s;
+}
+.team-card:hover .team-social-overlay { transform: translateY(0); }
+.team-social-overlay a {
+  width: 34px; height: 34px; background: var(--white); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--primary); font-size: 0.88rem; transition: all 0.2s;
+}
+.team-social-overlay a:hover { background: var(--primary); color: var(--white); }
+.team-body { padding: 18px 16px; text-align: center; }
+.team-body h3 { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.team-position { font-size: 0.78rem; color: var(--primary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; font-family: var(--body-font); }
+.team-bio { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+.team-badge-tag {
+  display: inline-block; background: var(--primary-light); color: var(--primary);
+  font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  margin-bottom: 8px; font-family: var(--body-font);
+}
+.dept-heading { font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 6px; font-family: var(--heading-font); }
+.dept-divider { width: 60px; height: 3px; background: var(--primary); border-radius: 2px; margin: 0 auto 32px; }
+.team-small .team-img { height: 150px; }
+.team-small .team-body h4 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 2px; font-family: var(--heading-font); }
+
+/* ===== GALLERY ===== */
+.gallery-filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 36px; }
+.filter-btn {
+  padding: 9px 22px; background: var(--white); border: 1px solid var(--border);
+  border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+  color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+  font-family: var(--body-font);
+}
+.filter-btn.active, .filter-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+.gallery-card {
+  border-radius: var(--radius-lg); overflow: hidden;
+  position: relative; background: var(--white);
+  border: 1px solid var(--border); box-shadow: var(--shadow); transition: all 0.25s;
+}
+.gallery-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.gallery-img-wrap { position: relative; overflow: hidden; aspect-ratio: 1/1; }
+.gallery-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.gallery-card:hover .gallery-img-wrap img { transform: scale(1.08); }
+.gallery-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.82), rgba(200,16,46,0.5) 80%, transparent);
+  opacity: 0; transition: opacity 0.3s;
+  display: flex; align-items: flex-end; padding: 20px;
+}
+.gallery-card:hover .gallery-overlay { opacity: 1; }
+.gallery-info { transform: translateY(14px); transition: transform 0.3s; color: var(--white); width: 100%; }
+.gallery-card:hover .gallery-info { transform: translateY(0); }
+.gallery-cat { display: inline-block; background: rgba(255,255,255,0.15); padding: 3px 10px; border-radius: 20px; font-size: 0.72rem; margin-bottom: 6px; font-family: var(--body-font); }
+.gallery-info h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+.gallery-info p { font-size: 0.8rem; opacity: 0.85; margin-bottom: 10px; }
+.gallery-stats { display: flex; gap: 14px; font-size: 0.8rem; margin-bottom: 10px; }
+.gallery-stats i { color: #ff6b6b; }
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-card {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); padding: 28px 24px;
+  box-shadow: var(--shadow); transition: all 0.25s;
+  position: relative; overflow: hidden;
+}
+.testimonial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--primary); }
+.testimonial-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.testimonial-card.featured { border-color: var(--primary); }
+
+.testimonial-author { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.author-img { position: relative; }
+.author-img img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-light); }
+.verified-dot {
+  position: absolute; bottom: 3px; right: 3px; width: 20px; height: 20px;
+  background: #059669; border-radius: 50%; border: 2px solid var(--white);
+  display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 0.6rem;
+}
+.author-info h4 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.author-info p { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 5px; }
+.stars { color: #f59e0b; font-size: 0.8rem; display: flex; gap: 2px; }
+.testimonial-quote {
+  color: var(--text-muted); font-size: 0.93rem; line-height: 1.78;
+  font-style: italic; padding-left: 14px; border-left: 3px solid var(--primary);
+  font-family: var(--heading-font);
+}
+.quote-mark-bg { position: absolute; top: 14px; right: 20px; color: var(--primary-light); font-size: 3rem; line-height: 1; pointer-events: none; font-family: var(--heading-font); }
+.top-review-ribbon {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--primary); color: var(--white);
+  font-size: 0.75rem; font-weight: 600; padding: 4px 12px;
+  border-radius: 20px; margin-bottom: 14px; font-family: var(--body-font);
+}
+.verified-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #e6f9f0; color: #059669;
+  font-size: 0.78rem; font-weight: 600; padding: 4px 12px;
+  border-radius: 20px; margin-top: 16px;
+  border: 1px solid rgba(5,150,105,0.2); font-family: var(--body-font);
+}
+
+/* ===== CONTACT ===== */
+.contact-info-box {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); padding: 32px 28px;
+  box-shadow: var(--shadow); height: 100%;
+}
+.contact-info-box h3 { font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.contact-info-box .subtitle { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px dashed var(--border); }
+
+.contact-item-row {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 16px; background: var(--bg-light); border-radius: 10px;
+  margin-bottom: 14px; border: 1px solid transparent; transition: all 0.2s;
+}
+.contact-item-row:hover { border-color: var(--primary); background: var(--primary-light); transform: translateX(5px); }
+.contact-item-icon {
+  width: 46px; height: 46px; background: var(--primary); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 1rem; flex-shrink: 0;
+}
+.contact-item-text h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 3px; font-family: var(--body-font); }
+.contact-item-text p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; margin: 0; }
+
+.social-follow h4 { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px dashed var(--border); font-family: var(--body-font); }
+.social-row { display: flex; gap: 10px; }
+.social-btn {
+  width: 42px; height: 42px; background: var(--bg-light); border: 1px solid var(--border);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted); font-size: 1rem; transition: all 0.2s;
+}
+.social-btn:hover { background: var(--primary); color: var(--white); border-color: var(--primary); transform: translateY(-3px); }
+
+.contact-form-box {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); padding: 32px 28px; box-shadow: var(--shadow);
+}
+.contact-form-box h3 {
+  font-size: 1.5rem; font-weight: 700; color: var(--text);
+  margin-bottom: 24px; padding-bottom: 12px;
+  border-bottom: 3px solid var(--primary); display: inline-block;
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.form-group { position: relative; margin-bottom: 16px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 13px 16px 13px 42px;
+  border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 0.9rem; font-family: var(--body-font);
+  color: var(--text); background: var(--bg-light); transition: all 0.2s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--primary); background: var(--white);
+  box-shadow: 0 0 0 3px rgba(200,16,46,0.1);
+}
+.form-group .icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--primary); font-size: 0.88rem; pointer-events: none; }
+.form-group.textarea-wrap .icon { top: 16px; transform: none; }
+.form-group textarea { resize: vertical; min-height: 110px; padding-top: 13px; }
+.form-group select { appearance: none; cursor: pointer; }
+.btn-submit {
+  width: 100%; padding: 14px; background: var(--primary); color: var(--white);
+  border: none; border-radius: 8px; font-size: 0.95rem; font-weight: 600;
+  font-family: var(--body-font); cursor: pointer; transition: all 0.25s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  letter-spacing: 0.03em;
+}
+.btn-submit:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,16,46,0.3); }
+
+.map-box {
+  background: var(--white); border-radius: var(--radius-lg);
+  border: 1px solid var(--border); padding: 24px;
+  box-shadow: var(--shadow); margin-top: 24px;
+}
+.map-box h3 { font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 16px; }
+.map-box iframe { width: 100%; height: 260px; border: none; border-radius: 10px; }
+
+.emergency-bar {
+  background: var(--accent); border-radius: var(--radius-lg);
+  padding: 24px 32px; margin-top: 40px;
+  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.emergency-bar-icon {
+  width: 56px; height: 56px; background: var(--primary); border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 1.4rem; flex-shrink: 0;
+}
+.emergency-bar-text h4 { color: var(--white); font-size: 1.15rem; font-weight: 700; margin-bottom: 3px; }
+.emergency-bar-text p { color: rgba(255,255,255,0.7); font-size: 0.86rem; margin: 0; }
+.emergency-bar-phone {
+  margin-left: auto; display: flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+  padding: 12px 24px; border-radius: 50px;
+}
+.emergency-bar-phone i { color: var(--primary); font-size: 1.2rem; }
+.emergency-bar-phone span { color: var(--white); font-size: 1.1rem; font-weight: 700; font-family: var(--heading-font); letter-spacing: 0.5px; }
+
+/* ===== FOOTER ===== */
+.footer { background: var(--accent); color: rgba(255,255,255,0.85); padding: 64px 0 0; }
+.footer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; margin-bottom: 48px; }
+.footer-title {
+  font-size: 1.15rem; font-weight: 700; color: var(--white);
+  margin-bottom: 20px; padding-bottom: 10px;
+  border-bottom: 2px solid var(--primary); display: inline-block;
+  font-family: var(--heading-font);
+}
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: rgba(255,255,255,0.78); font-size: 0.87rem; display: flex; align-items: center; gap: 8px; transition: all 0.2s; }
+.footer-links a i { color: var(--primary); font-size: 0.7rem; }
+.footer-links a:hover { color: var(--white); gap: 12px; }
+
+.footer-contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.footer-contact-icon {
+  width: 36px; height: 36px; background: var(--primary); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); font-size: 0.88rem; flex-shrink: 0;
+}
+.footer-contact-item a, .footer-contact-item span { color: rgba(255,255,255,0.78); font-size: 0.86rem; transition: color 0.2s; }
+.footer-contact-item a:hover { color: var(--white); }
+
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 20px 0; text-align: center; }
+.footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.82rem; margin: 4px 0; }
+
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+  position: fixed; bottom: 28px; right: 28px;
+  width: 44px; height: 44px; background: var(--primary); color: var(--white);
+  border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(200,16,46,0.4); transition: all 0.25s; z-index: 999;
+  opacity: 0;
+}
+.back-to-top.visible { opacity: 1; }
+.back-to-top:hover { background: var(--primary-dark); transform: translateY(-3px); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-card { display: none; }
+  .about-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .grid-3 { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 768px) {
+  .topbar { display: none; }
+  .navbar { position: sticky; top: 0; z-index: 100; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); flex-direction: column; padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); gap: 2px; z-index: 999; }
+  .nav-links.open { display: flex; }
+  .hamburger { display: flex; }
+  .section { padding: 52px 0; }
+  .section-heading { font-size: 1.8rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-desc { font-size: 0.95rem; }
+  .hero-buttons { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2,1fr); }
+  .stats-grid { grid-template-columns: repeat(2,1fr); }
+  .features-grid-2x3 { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .emergency-bar { flex-direction: column; text-align: center; padding: 24px; }
+  .emergency-bar-phone { margin-left: 0; }
+  .about-image-badge { right: 0; bottom: -10px; padding: 10px 14px; }
+  .testimonial-grid { grid-template-columns: 1fr !important; }
+  .contact-form-box, .contact-info-box { padding: 24px 20px; }
+  .map-box iframe { height: 200px; }
+  .navbar-actions .btn-primary { display: none; }
+  .search-btn { display: none; }
+}
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .hero h1 { font-size: 1.9rem; }
+  .hero-pill { font-size: 0.8rem; padding: 6px 12px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .stat-card { padding: 20px 14px; }
+  .stat-number { font-size: 1.8rem; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .section-heading { font-size: 1.6rem; }
+  .btn { padding: 11px 22px; font-size: 0.85rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .emergency-bar-phone span { font-size: 0.95rem; }
+  .mvv-card { padding: 24px 18px; }
+  .service-card { padding: 24px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <span class="topbar-item"><i class="fas fa-map-marker-alt"></i> Address 356, Mtora stands</span>
+      <span class="topbar-item"><i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection#dfbbb0b2b6b1b6b0b1bbbaacabb6b1a69fb8b2beb6b3f1bcb0b2"><span class="__cf_email__" data-cfemail="9afef5f7f3f4f3f5f4feffe9eef3f4e3dafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a></span>
+      <span class="topbar-item"><i class="fas fa-phone-alt"></i> <a href="tel:+263783796279">+(263) 78 379 6279</a></span>
+    </div>
+    <div class="topbar-right">
+      <div class="social-icons">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="navbar-brand">
+      <div class="brand-logo-circle">D</div>
+      <div class="brand-name">DOMINION DESTINY <span>PRIMARY SCHOOL</span></div>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="service.html">Services</a>
+      <a href="program.html">Programs</a>
+      <a href="event.html">Events</a>
+      <a href="contact.html">Contact</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
+    <div class="navbar-actions">
+      <div class="search-btn"><i class="fas fa-search"></i></div>
+      <a href="contact.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">Enroll Now</a>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">
+          <div class="hero-badge-dot"><i class="fas fa-star" style="font-size:0.75rem;"></i></div>
+          <span class="hero-badge-text">Welcome to Excellence</span>
+          <span class="hero-badge-year">Est. 2015</span>
+        </div>
+        <h1>DOMINION DESTINY<br><span class="gradient-text">PRIMARY SCHOOL</span></h1>
+        <p class="hero-desc">Where every child is nurtured, empowered, and equipped to lead — grounded in Christian values and academic excellence.</p>
+        <div class="hero-pills">
+          <div class="hero-pill"><i class="fas fa-check-circle"></i> Qualified Teachers</div>
+          <div class="hero-pill"><i class="fas fa-check-circle"></i> Modern Facilities</div>
+          <div class="hero-pill"><i class="fas fa-check-circle"></i> Small Class Sizes</div>
+        </div>
+        <div class="hero-buttons">
+          <a href="contact.html" class="btn btn-primary">Enroll Now <i class="fas fa-arrow-right"></i></a>
+          <a href="about.html" class="btn" style="background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.25);">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-icon"><i class="fas fa-calendar-alt"></i></div>
+        <h4>Open Enrollment</h4>
+        <p>2024–2025 Academic Year</p>
+        <div class="progress-label"><span>Spots Available</span><span>75%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+        <a href="contact.html" class="hero-card-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-child"></i></div>
+        <div class="stat-number">300+</div>
+        <div class="stat-label">Students</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Qualified Teachers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="stat-number">11+</div>
+        <div class="stat-label">Years of Excellence</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="stat-number">94%</div>
+        <div class="stat-label">2024 Pass Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-intro-grid">
+      <div class="about-image-wrap">
+        <img src="img/33.jpeg" alt="Dominion Destiny Primary School students and teachers">
+        <div class="about-image-badge">
+          <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+          <div>
+            <div class="label">Established</div>
+            <div class="value">2015</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="badge"><i class="fas fa-school"></i> Get To Know Us</div>
+        <h2 class="section-heading">(ABOUT) <span class="text-primary">Dominion Destiny</span></h2>
+        <div class="divider"><span></span><span></span><span></span></div>
+        <p style="color:var(--text-muted);font-size:0.95rem;line-height:1.82;margin-bottom:24px;">
+          Dominion Destiny Primary School is dedicated to providing quality education in a nurturing environment that fosters academic excellence and character development, grounded in a Christian world view.
+        </p>
+        <div class="features-grid-2x3">
+          <div class="feature-row"><div class="icon"><i class="fas fa-futbol"></i></div><div><h6>Sport Activities</h6><small>Multiple sports</small></div></div>
+          <div class="feature-row"><div class="icon"><i class="fas fa-tree"></i></div><div><h6>Outdoor Games</h6><small>Fun &amp; learning</small></div></div>
+          <div class="feature-row"><div class="icon"><i class="fas fa-apple-alt"></i></div><div><h6>Nutritious Meals</h6><small>Healthy food daily</small></div></div>
+          <div class="feature-row"><div class="icon"><i class="fas fa-shield-alt"></i></div><div><h6>Highly Secured</h6><small>Safe environment</small></div></div>
+          <div class="feature-row"><div class="icon"><i class="fas fa-smile"></i></div><div><h6>Friendly Environment</h6><small>Warm &amp; welcoming</small></div></div>
+          <div class="feature-row"><div class="icon"><i class="fas fa-user-graduate"></i></div><div><h6>Qualified Teachers</h6><small>Expert educators</small></div></div>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Enroll Now <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Mission / Vision / Values -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="fas fa-flag"></i> Our Foundation</div>
+      <h2 class="section-heading">Mandated to Serve, <span class="text-primary">Destined for Greatness</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+    </div>
+    <div class="grid-3">
+      <div class="mvv-card">
+        <div class="mvv-icon mission"><i class="fas fa-bullseye"></i></div>
+        <h3>Our Mission</h3>
+        <p>To provide quality education in excellence in the context of a Christian world view that makes a valuable contribution towards a stable and vibrant nation by equipping children today to be head and shoulders above their peers, with the skills, attitudes and values critical for their future survival and prosperity.</p>
+      </div>
+      <div class="mvv-card">
+        <div class="mvv-icon vision"><i class="fas fa-eye"></i></div>
+        <h3>Our Vision</h3>
+        <p>To be an icon of excellence in the provision of quality primary education in Zimbabwe and thus significantly contribute to its vision of achieving an informed and educated citizen.</p>
+      </div>
+      <div class="mvv-card">
+        <div class="mvv-icon values"><i class="fas fa-heart"></i></div>
+        <h3>Our Values</h3>
+        <ul class="mvv-list">
+          <li><i class="fas fa-check-circle"></i> Excellence</li>
+          <li><i class="fas fa-check-circle"></i> Integrity</li>
+          <li><i class="fas fa-check-circle"></i> Compassion</li>
+          <li><i class="fas fa-check-circle"></i> Respect</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="fas fa-gem"></i> Why Choose Us</div>
+      <h2 class="section-heading">What <span class="text-primary">We Do</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+    </div>
+    <div class="grid-3">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-gamepad"></i></div>
+        <h3>Study &amp; Play</h3>
+        <p>We balance quality academic learning with sports and play, helping learners grow intellectually, physically, and socially.</p>
+        <a href="service.html" class="btn btn-outline" style="padding:9px 22px;font-size:0.85rem;">Read More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-users"></i></div>
+        <h3>Expert Teachers</h3>
+        <p>Our experienced and qualified teachers inspire, guide, and support every learner to reach their full potential every day.</p>
+        <a href="service.html" class="btn btn-outline" style="padding:9px 22px;font-size:0.85rem;">Read More <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card">
+        <div class="service-featured-badge">Priority</div>
+        <div class="service-icon"><i class="fas fa-heart"></i></div>
+        <h3>Mental Health</h3>
+        <p>We prioritize emotional wellbeing with dedicated support, counseling, and a nurturing environment for every child.</p>
+        <a href="service.html" class="btn btn-outline" style="padding:9px 22px;font-size:0.85rem;">Read More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="service.html" class="btn btn-outline">Explore All Services <i class="fas fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Events -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="far fa-calendar-alt"></i> What's Happening</div>
+      <h2 class="section-heading">Upcoming <span class="text-primary">Events</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+      <p class="section-subtext" style="margin:0 auto;">Mark your calendar and join us for these exciting school activities</p>
+    </div>
+    <div class="grid-3">
+      <div class="event-card">
+        <div class="event-header">
+          <span class="event-category music"><i class="fas fa-music"></i> Music &amp; Art</span>
+          <div class="event-date-box"><span class="day">29</span><span class="month">Nov</span></div>
+        </div>
+        <div class="event-body">
+          <h3 class="event-title">Music &amp; Drawing Workshop</h3>
+          <div class="event-meta">
+            <div class="meta-row"><i class="far fa-clock"></i> 10:00 AM – 12:00 PM</div>
+            <div class="meta-row"><i class="fas fa-map-marker-alt"></i> Dominion Primary School</div>
+            <div class="meta-row"><i class="fas fa-users"></i> 32 Attending</div>
+          </div>
+          <p class="event-desc">Learners explore music and art to build creativity, confidence, and self-expression through hands-on activities.</p>
+          <div class="event-footer">
+            <a href="event.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">Learn More <i class="fas fa-arrow-right"></i></a>
+            <span class="status-badge status-available">Available</span>
+          </div>
+        </div>
+      </div>
+      <div class="event-card featured">
+        <div class="event-body" style="padding-top:22px;">
+          <span class="featured-ribbon"><i class="fas fa-star"></i> Featured</span>
+        </div>
+        <div class="event-header" style="margin-top:-16px;">
+          <span class="event-category"><i class="fas fa-trophy"></i> Celebration</span>
+          <div class="event-date-box"><span class="day">29</span><span class="month">Nov</span></div>
+        </div>
+        <div class="event-body">
+          <h3 class="event-title">Prize Giving Day</h3>
+          <div class="event-meta">
+            <div class="meta-row"><i class="far fa-clock"></i> 10:00 AM – 4:00 PM</div>
+            <div class="meta-row"><i class="fas fa-map-marker-alt"></i> Dominion Primary School</div>
+            <div class="meta-row"><i class="fas fa-users"></i> 64 Attending</div>
+          </div>
+          <p class="event-desc">We celebrate learners' achievements in academics, sports, and extracurricular activities with awards and recognition.</p>
+          <div class="event-footer">
+            <a href="event.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">Learn More <i class="fas fa-arrow-right"></i></a>
+            <span class="status-badge status-limited">Limited Seats</span>
+          </div>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-header">
+          <span class="event-category health"><i class="fas fa-heartbeat"></i> Health</span>
+          <div class="event-date-box"><span class="day">29</span><span class="month">Nov</span></div>
+        </div>
+        <div class="event-body">
+          <h3 class="event-title">Child Health Consciousness</h3>
+          <div class="event-meta">
+            <div class="meta-row"><i class="far fa-clock"></i> 10:00 AM – 12:00 PM</div>
+            <div class="meta-row"><i class="fas fa-map-marker-alt"></i> Dominion Primary School</div>
+            <div class="meta-row"><i class="fas fa-users"></i> 26 Attending</div>
+          </div>
+          <p class="event-desc">We promote healthy habits, nutrition, and hygiene to ensure learners grow strong, active, and health-conscious.</p>
+          <div class="event-footer">
+            <a href="event.html" class="btn btn-primary" style="padding:9px 20px;font-size:0.85rem;">Learn More <i class="fas fa-arrow-right"></i></a>
+            <span class="status-badge status-available">Available</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="event.html" class="btn btn-outline">Browse All Events <i class="fas fa-calendar-alt"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="fas fa-users"></i> Our Leadership</div>
+      <h2 class="section-heading">Meet Our <span class="text-primary">Expert Team</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+      <p class="section-subtext" style="margin:0 auto;">Dedicated educators committed to nurturing young minds</p>
+    </div>
+    <div class="grid-4" style="margin-bottom:48px;">
+      <div class="team-card">
+        <div class="team-img"><img src="img/d11.jpeg" alt="Dr. Sarah Mpofu"><div class="team-social-overlay"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="team-body"><div class="team-badge-tag">Leadership</div><h3>Dr. Sarah Mpofu</h3><div class="team-position">Chairperson</div><p class="team-bio">Leading with vision and dedication for over 15 years in education.</p></div>
+      </div>
+      <div class="team-card featured-leader">
+        <div class="team-img"><img src="img/d10.jpeg" alt="Mr. Tendai Mukanya"><div class="team-social-overlay"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="team-body"><div class="team-badge-tag">Head of School</div><h3>Mr. Tendai Mukanya</h3><div class="team-position">Principal</div><p class="team-bio">M.Ed in Educational Leadership, 12+ years shaping young minds.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-img"><img src="img/d9.jpeg" alt="Mrs. Grace Dube"><div class="team-social-overlay"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="team-body"><h3>Mrs. Grace Dube</h3><div class="team-position">Senior Teacher</div><p class="team-bio">B.Ed in Primary Education, Curriculum Specialist with 10 years experience.</p></div>
+      </div>
+      <div class="team-card">
+        <div class="team-img"><img src="img/team-2.jpg" alt="Coach Thomas Ndlovu"><div class="team-social-overlay"><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fas fa-envelope"></i></a></div></div>
+        <div class="team-body"><h3>Coach Thomas Ndlovu</h3><div class="team-position">Sports Director</div><p class="team-bio">Certified PE Instructor, Former National Athlete, 8 years coaching experience.</p></div>
+      </div>
+    </div>
+    <div class="text-center" style="margin-bottom:28px;">
+      <h3 class="dept-heading">Department Heads</h3>
+      <div class="dept-divider"></div>
+    </div>
+    <div class="grid-4">
+      <div class="team-card team-small"><div class="team-img"><img src="img/d3.jpeg" alt="Ms. P. Sibanda"></div><div class="team-body"><h4>Ms. P. Sibanda</h4><div class="team-position">Academics</div></div></div>
+      <div class="team-card team-small"><div class="team-img"><img src="img/d8.jpeg" alt="Ms. L. Moyo"></div><div class="team-body"><h4>Ms. L. Moyo</h4><div class="team-position">Assistant Sports</div></div></div>
+      <div class="team-card team-small"><div class="team-img"><img src="img/d1.jpeg" alt="Mrs. R. Tinarwo"></div><div class="team-body"><h4>Mrs. R. Tinarwo</h4><div class="team-position">ECD Coordinator</div></div></div>
+      <div class="team-card team-small"><div class="team-img"><img src="img/program-teacher.png" alt="Ms. C. Maphosa"></div><div class="team-body"><h4>Ms. C. Maphosa</h4><div class="team-position">Senior Secretary</div></div></div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="contact.html" class="btn btn-outline">Join Our Team <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="fas fa-images"></i> School Life</div>
+      <h2 class="section-heading">Our <span class="text-primary">Gallery</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+      <p class="section-subtext" style="margin:0 auto;">Discover precious moments and activities from our school family</p>
+    </div>
+    <div class="gallery-filters">
+      <button class="filter-btn active" data-filter="all">All Moments</button>
+      <button class="filter-btn" data-filter="activities">Activities</button>
+      <button class="filter-btn" data-filter="events">Events</button>
+      <button class="filter-btn" data-filter="playtime">Playtime</button>
+      <button class="filter-btn" data-filter="learning">Learning</button>
+    </div>
+    <div class="grid-3" id="galleryGrid">
+      <div class="gallery-card" data-cat="activities"><div class="gallery-img-wrap"><img src="img/art.jpg" alt="Creative Art Session"><div class="gallery-overlay"><div class="gallery-info"><span class="gallery-cat">Activities</span><h4>Creative Art Session</h4><p>Children exploring creativity through games</p><div class="gallery-stats"><span><i class="fas fa-heart"></i> 24</span><span><i class="fas fa-eye"></i> 156</span></div></div></div></div></div>
+      <div class="gallery-card" data-cat="playtime"><div class="gallery-img-wrap"><img src="img/about.jpg" alt="Outdoor Fun"><div class="gallery-overlay"><div class="gallery-info"><span class="gallery-cat">Playtime</span><h4>Outdoor Fun</h4><p>Joyful moments in our safe playground</p><div class="gallery-stats"><span><i class="fas fa-heart"></i> 32</span><span><i class="fas fa-eye"></i> 189</span></div></div></div></div></div>
+      <div class="gallery-card" data-cat="learning"><div class="gallery-img-wrap"><img src="img/d5.jpeg" alt="Story Time"><div class="gallery-overlay"><div class="gallery-info"><span class="gallery-cat">Learning</span><h4>Story Time</h4><p>Engaging storytelling sessions</p><div class="gallery-stats"><span><i class="fas fa-heart"></i> 28</span><span><i class="fas fa-eye"></i> 143</span></div></div></div></div></div>
+      <div class="gallery-card" data-cat="events"><div class="gallery-img-wrap"><img src="img/event-2.jpg" alt="Prize Giving Day"><div class="gallery-overlay"><div class="gallery-info"><span class="gallery-cat">Events</span><h4>Prize Giving Day</h4><p>Special moments celebrating together</p><div class="gallery-stats"><span><i class="fas fa-heart"></i> 45</span><span><i class="fas fa-eye"></i> 221</span></div></div></div></div></div>
+      <div class="gallery-card" data-cat="activities"><div class="gallery-img-wrap"><img src="img/event-1.jpg" alt="Music & Movement"><div class="gallery-overlay"><div class="gallery-info"><span class="gallery-cat">Activities</span><h4>Music &amp; Movement</h4><p>Exploring rhythm and sounds</p><div class="gallery-stats"><span><i class="fas fa-heart"></i> 31</span><span><i class="fas fa-eye"></i> 167</span></div></div></div></div></div>
+      <div class="gallery-card" data-cat="playtime"><div class="gallery-img-wrap"><img src="img/1.PNG" alt="Sensory Exploration"><div class="gallery-overlay"><div class="gallery-info"><span class="gallery-cat">Playtime</span><h4>Sensory Exploration</h4><p>Hands-on learning through play</p><div class="gallery-stats"><span><i class="fas fa-heart"></i> 27</span><span><i class="fas fa-eye"></i> 134</span></div></div></div></div></div>
+    </div>
+    <div class="text-center" style="margin-top:40px;">
+      <a href="gallery.html" class="btn btn-outline"><i class="fas fa-images"></i> View More Moments</a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="fas fa-comment-dots"></i> Parent Testimonials</div>
+      <h2 class="section-heading">What Parents <span class="text-primary">Say About Us</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+    </div>
+    <div class="grid-4">
+      <div class="testimonial-card">
+        <div class="quote-mark-bg">"</div>
+        <div class="testimonial-author">
+          <div class="author-img"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" alt="Ms. Rutendo Moyo"><div class="verified-dot"><i class="fas fa-check"></i></div></div>
+          <div class="author-info"><h4>Ms. Rutendo Moyo</h4><p>Grade 1 Parent</p><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+        </div>
+        <p class="testimonial-quote">"My ECD child became confident and excited about learning within just a few months."</p>
+        <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified Parent</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark-bg">"</div>
+        <div class="testimonial-author">
+          <div class="author-img"><img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&q=80" alt="Mrs. Grace Ndlovu"><div class="verified-dot"><i class="fas fa-check"></i></div></div>
+          <div class="author-info"><h4>Mrs. Grace Ndlovu</h4><p>Grade 2 Twins Parent</p><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+        </div>
+        <p class="testimonial-quote">"Dominion feels like family. My twins have thrived socially and academically."</p>
+        <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified Parent</div>
+      </div>
+      <div class="testimonial-card featured">
+        <div class="top-review-ribbon"><i class="fas fa-crown"></i> Top Review</div>
+        <div class="quote-mark-bg">"</div>
+        <div class="testimonial-author">
+          <div class="author-img"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&q=80" alt="Mr. T. Mukanya"><div class="verified-dot"><i class="fas fa-check"></i></div></div>
+          <div class="author-info"><h4>Mr. T. Mukanya</h4><p>Grade 5 Parent</p><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+        </div>
+        <p class="testimonial-quote">"My son excels in math AND soccer. He's confident, disciplined, and loves school."</p>
+        <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified Parent</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="quote-mark-bg">"</div>
+        <div class="testimonial-author">
+          <div class="author-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200&q=80" alt="Mrs. Chipo Dube"><div class="verified-dot"><i class="fas fa-check"></i></div></div>
+          <div class="author-info"><h4>Mrs. Chipo Dube</h4><p>Grade 3 Parent</p><div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div>
+        </div>
+        <p class="testimonial-quote">"My daughter joined unable to read. Now in Grade 3, she reads chapter books!"</p>
+        <div class="verified-badge"><i class="fas fa-shield-alt"></i> Verified Parent</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px;">
+      <div class="badge" style="margin:0 auto 12px;"><i class="fas fa-headset"></i> Get In Touch</div>
+      <h2 class="section-heading">Contact <span class="text-primary">Us</span></h2>
+      <div class="divider center"><span></span><span></span><span></span></div>
+      <p class="section-subtext" style="margin:0 auto;">Reach out with any questions or to schedule a school visit.</p>
+    </div>
+    <div class="grid-2" style="align-items:start;">
+      <div class="contact-info-box">
+        <h3>Visit Our School</h3>
+        <p class="subtitle">We're here to welcome you</p>
+        <div class="contact-item-row"><div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-item-text"><h4>Our Location</h4><p>Address 356, Mtora stands, Nembudziya, Zimbabwe</p></div></div>
+        <div class="contact-item-row"><div class="contact-item-icon"><i class="fas fa-phone-alt"></i></div><div class="contact-item-text"><h4>Call Us</h4><p>+(263) 78 379 6279<br>+(263) 77 975 6175</p></div></div>
+        <div class="contact-item-row"><div class="contact-item-icon"><i class="fas fa-envelope"></i></div><div class="contact-item-text"><h4>Email Us</h4><p><a href="/cdn-cgi/l/email-protection#65010a080c0b0c0a0b010016110c0b1c250208040c094b060a08" style="color:var(--primary);"><span class="__cf_email__" data-cfemail="2642494b4f484f4948424355524f485f66414b474f4a0845494b">[email&#160;protected]</span></a></p></div></div>
+        <div class="contact-item-row"><div class="contact-item-icon"><i class="fas fa-clock"></i></div><div class="contact-item-text"><h4>School Hours</h4><p>Mon – Fri: 7:30 AM – 3:00 PM<br>Saturday: 9:00 AM – 12:00 PM</p></div></div>
+        <div class="social-follow">
+          <h4>Follow Us</h4>
+          <div class="social-row">
+            <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form-box">
+          <h3>Send Us a Message</h3>
+          <div class="form-row">
+            <div class="form-group"><input type="text" placeholder="Your Name" required><i class="fas fa-user icon"></i></div>
+            <div class="form-group"><input type="email" placeholder="Your Email" required><i class="fas fa-envelope icon"></i></div>
+            <div class="form-group"><input type="tel" placeholder="Your Phone"><i class="fas fa-phone icon"></i></div>
+            <div class="form-group">
+              <select><option value="" disabled selected>Select Subject</option><option>Admissions</option><option>General Inquiry</option><option>Schedule a Tour</option><option>Support</option></select>
+              <i class="fas fa-tag icon"></i>
+            </div>
+          </div>
+          <div class="form-group textarea-wrap"><textarea placeholder="Your Message" required></textarea><i class="fas fa-pencil-alt icon"></i></div>
+          <button class="btn-submit">Send Message <i class="fas fa-paper-plane"></i></button>
+        </div>
+        <div class="map-box">
+          <h3>Find Us Here</h3>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3890.5!2d28.5!3d-17.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDMwJzAwLjAiUyAyOMKwMzAnMDAuMCJF!5e0!3m2!1sen!2szw!4v1234567890" loading="lazy" title="Dominion Destiny location"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="emergency-bar">
+      <div class="emergency-bar-icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="emergency-bar-text"><h4>Emergency Contact</h4><p>For urgent matters during school hours</p></div>
+      <div class="emergency-bar-phone"><i class="fas fa-phone-alt"></i><span>+(263) 78 912 3456</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4 class="footer-title">Admissions</h4>
+        <ul class="footer-links">
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Admissions Process</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Fees Structure</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Tour Booking</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Online Application</a></li>
+          <li><a href="#"><i class="fas fa-chevron-right"></i> Uniform Shop</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+          <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+          <li><a href="service.html"><i class="fas fa-chevron-right"></i> Services &amp; Facilities</a></li>
+          <li><a href="program.html"><i class="fas fa-chevron-right"></i> Programs</a></li>
+          <li><a href="event.html"><i class="fas fa-chevron-right"></i> Events</a></li>
+          <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-title">Contact</h4>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fas fa-phone-alt"></i></div><a href="tel:+263783796279">+(263) 78 379 6279</a></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fas fa-phone-alt"></i></div><a href="tel:+263779756175">+(263) 77 975 6175</a></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fas fa-envelope"></i></div><a href="/cdn-cgi/l/email-protection#34505b595d5a5d5b5a505147405d5a4d745359555d581a575b59"><span class="__cf_email__" data-cfemail="23474c4e4a4d4a4c4d474650574a4d5a63444e424a4f0d404c4e">[email&#160;protected]</span></a></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fas fa-map-marker-alt"></i></div><span>Address 356, Mtora stands</span></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fas fa-city"></i></div><span>Nembudziya, Zimbabwe</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="year"></span> Dominion Destiny Primary School. All Rights Reserved.</p>
+      <p>Designed by Ain-Graphix &mdash; +(263) 78 698 0823</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Mobile nav
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+
+  // Gallery filter
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      docume

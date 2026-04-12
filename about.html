@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dominion Destiny - About Us</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --rose:    #e8295b;
+            --rose-dk: #c0204a;
+            --violet:  #6d28d9;
+            --sky:     #0ea5e9;
+            --dark:    #0f0e17;
+            --mid:     #3d3d4e;
+            --soft:    #f7f5f2;
+            --white:   #ffffff;
+            --card-bg: rgba(255,255,255,0.92);
+            --shadow:  0 20px 60px rgba(15,14,23,0.12);
+            --radius:  28px;
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #f7f5f2;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ── SPINNER ── */
+        #spinner {
+            position: fixed; inset: 0;
+            background: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity .4s ease;
+        }
+        #spinner.hide { opacity: 0; pointer-events: none; }
+        .spin-ring {
+            width: 48px; height: 48px;
+            border: 4px solid #e5e7eb;
+            border-top-color: var(--rose);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── TOPBAR ── */
+        .topbar {
+            background: var(--dark);
+            padding: 10px 40px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .topbar-info { display: flex; gap: 28px; flex-wrap: wrap; }
+        .topbar-info a {
+            color: rgba(255,255,255,.75);
+            text-decoration: none;
+            font-size: .82rem;
+            display: flex; align-items: center; gap: 6px;
+            transition: color .25s;
+        }
+        .topbar-info a:hover { color: var(--rose); }
+        .topbar-info i { color: var(--rose); font-size: .75rem; }
+        .topbar-social { display: flex; gap: 10px; }
+        .topbar-social a {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.7);
+            font-size: .75rem;
+            text-decoration: none;
+            transition: all .25s;
+        }
+        .topbar-social a:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: var(--white);
+            padding: 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 2px 24px rgba(15,14,23,0.08);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { display: flex; align-items: center; gap: 12px; padding: 14px 0; text-decoration: none; }
+        .nav-brand img {
+            width: 52px; height: 52px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 2px solid #f0edf8;
+        }
+        .brand-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+        .brand-sub { font-size: .72rem; color: var(--rose); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+        .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+        .nav-links a {
+            padding: 8px 16px;
+            color: var(--mid);
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all .2s;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--rose);
+            background: rgba(232,41,91,.06);
+        }
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px;
+            background: var(--rose);
+            border-radius: 2px;
+        }
+        .nav-cta {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .btn-call {
+            display: flex; align-items: center; gap: 8px;
+            padding: 9px 20px;
+            background: var(--rose);
+            color: #fff;
+            border-radius: 40px;
+            text-decoration: none;
+            font-size: .85rem;
+            font-weight: 600;
+            transition: all .25s;
+        }
+        .btn-call:hover { background: var(--rose-dk); transform: translateY(-1px); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all .3s; }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            position: relative;
+            min-height: 55vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            background: var(--dark);
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('img/hero2.jpeg');
+            background-size: cover; background-position: center;
+            opacity: .35;
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(232,41,91,.25) 0%, rgba(109,40,217,.25) 100%);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2;
+            text-align: center;
+            padding: 60px 20px;
+            animation: fadeUp .8s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity:0; transform: translateY(24px); }
+            to   { opacity:1; transform: translateY(0); }
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 22px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            color: rgba(255,255,255,.9);
+            font-size: .82rem;
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .hero-eyebrow i { color: var(--rose); }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.05;
+            margin-bottom: 18px;
+            text-shadow: 0 4px 24px rgba(0,0,0,.3);
+        }
+        .page-hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #fff 30%, var(--rose) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .breadcrumb {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            font-size: .88rem; color: rgba(255,255,255,.65);
+        }
+        .breadcrumb a { color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+        .breadcrumb a:hover { color: var(--rose); }
+        .breadcrumb .sep { opacity: .4; }
+        .breadcrumb .current { color: #fff; font-weight: 600; }
+
+        /* ── SECTION SHARED ── */
+        section { padding: 90px 40px; }
+        .container { max-width: 1180px; margin: 0 auto; }
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--rose);
+            font-size: .8rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+        }
+        .section-tag::before, .section-tag::after {
+            content: '';
+            flex: 1; min-width: 30px; height: 1px;
+            background: currentColor;
+            opacity: .4;
+        }
+        h2.section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        h2.section-heading span {
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        p.section-lead {
+            color: var(--mid);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 580px;
+        }
+
+        /* ── ABOUT INTRO ── */
+        .about-intro { background: var(--white); }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        .about-image-wrap {
+            position: relative;
+        }
+        .about-image-wrap img {
+            width: 100%;
+            border-radius: var(--radius);
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 4/5;
+            box-shadow: var(--shadow);
+        }
+        .img-badge {
+            position: absolute;
+            bottom: 28px; left: 16px;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 16px 22px;
+            box-shadow: 0 12px 40px rgba(15,14,23,.14);
+            display: flex; align-items: center; gap: 12px;
+            animation: floatBadge 4s ease-in-out infinite;
+        }
+        @keyframes floatBadge {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(-8px); }
+        }
+        .img-badge-icon {
+            width: 44px; height: 44px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        .img-badge-text strong {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+            line-height: 1;
+        }
+        .img-badge-text span {
+            font-size: .75rem;
+            color: var(--mid);
+            font-weight: 500;
+        }
+        .img-accent {
+            position: absolute;
+            top: -18px; right: -18px;
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(232,41,91,.15), rgba(109,40,217,.15));
+            filter: blur(24px);
+            overflow: hidden;
+        }
+        .about-image-wrap { overflow: visible; }
+        .about-dropcap {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--rose);
+            float: left;
+            line-height: .85;
+            margin: 4px 12px 0 0;
+        }
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--mid);
+            margin-bottom: 28px;
+        }
+        .about-text .hi { color: var(--rose); font-weight: 600; }
+
+        /* feature chips */
+        .feature-chips {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+        .chip {
+            display: flex; align-items: flex-start; gap: 12px;
+            background: var(--soft);
+            border-radius: 14px;
+            padding: 14px 16px;
+            transition: all .25s;
+        }
+        .chip:hover { background: #fdf0f4; transform: translateY(-2px); }
+        .chip-icon {
+            width: 36px; height: 36px;
+            min-width: 36px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: .9rem;
+        }
+        .chip-label strong { display: block; font-size: .85rem; font-weight: 600; color: var(--dark); line-height: 1.2; }
+        .chip-label span { font-size: .75rem; color: var(--mid); }
+
+        /* buttons */
+        .btn-primary-rose {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 32px;
+            background: var(--rose);
+            color: #fff;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+            transition: all .25s;
+            border: none; cursor: pointer;
+        }
+        .btn-primary-rose:hover { background: var(--rose-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,41,91,.35); }
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--dark);
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+            border: 2px solid #e5e7eb;
+            transition: all .25s;
+            cursor: pointer;
+        }
+        .btn-ghost:hover { border-color: var(--rose); color: var(--rose); }
+        .btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+
+        /* ── MISSION / VISION / VALUES CARDS ── */
+        .mvv-section { background: var(--soft); }
+        .mvv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 56px;
+        }
+        .mvv-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 40px 32px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform .3s;
+        }
+        .mvv-card:hover { transform: translateY(-6px); }
+        .mvv-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--violet));
+        }
+        .mvv-icon {
+            width: 64px; height: 64px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(232,41,91,.1), rgba(109,40,217,.1));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+        .mvv-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+        .mvv-card p { color: var(--mid); font-size: .95rem; line-height: 1.75; }
+
+        /* ── DISCOVER / ABOUT 2 ── */
+        .discover-section { background: var(--white); }
+        .discover-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+        /* photo collage */
+        .collage {
+            position: relative;
+            height: 520px;
+        }
+        .collage-main {
+            position: absolute;
+            top: 0; left: 0;
+            width: 72%; height: 75%;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+        .collage-accent {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 52%; height: 48%;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: var(--shadow);
+            border: 6px solid var(--white);
+        }
+        .collage-float {
+            position: absolute;
+            bottom: 120px; left: 8px;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 14px 20px;
+            box-shadow: 0 12px 40px rgba(15,14,23,.14);
+            display: flex; align-items: center; gap: 12px;
+            animation: floatBadge 4s 1s ease-in-out infinite;
+        }
+        .collage-float-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+        }
+        .collage-float strong { display: block; font-size: 1.2rem; font-weight: 700; color: var(--dark); line-height: 1; }
+        .collage-float span { font-size: .72rem; color: var(--mid); }
+
+        /* progress cards */
+        .prog-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .prog-card {
+            background: var(--soft);
+            border-radius: 16px;
+            padding: 18px 20px;
+            transition: all .25s;
+        }
+        .prog-card:hover { background: #fdf0f4; }
+        .prog-header {
+            display: flex; align-items: center; gap: 10px;
+            margin-bottom: 10px;
+        }
+        .prog-header i { color: var(--rose); font-size: 1.1rem; }
+        .prog-header h4 { font-size: .9rem; font-weight: 600; color: var(--dark); }
+        .prog-card p { font-size: .8rem; color: var(--mid); margin-bottom: 10px; }
+        .prog-bar { height: 4px; background: #e5e7eb; border-radius: 2px; overflow: hidden; }
+        .prog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--rose), var(--violet));
+            border-radius: 2px;
+            transform-origin: left;
+            animation: fillBar 1.4s ease-out forwards;
+            transform: scaleX(0);
+        }
+        @keyframes fillBar { to { transform: scaleX(1); } }
+
+        /* social proof */
+        .trust-row {
+            display: flex; align-items: center; gap: 16px;
+            margin-top: 24px;
+        }
+        .stars-wrap .fa-star { color: #f59e0b; font-size: .9rem; }
+        .trust-label { font-size: .85rem; color: var(--mid); font-weight: 500; }
+
+        /* ── STATS STRIP ── */
+        .stats-strip {
+            background: linear-gradient(135deg, var(--rose), var(--rose-dk) 50%, var(--violet));
+            padding: 60px 40px;
+        }
+        .stats-grid {
+            max-width: 900px; margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+        .stat-block {
+            text-align: center;
+            padding: 0 20px;
+            border-right: 1px solid rgba(255,255,255,.2);
+        }
+        .stat-block:last-child { border-right: none; }
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-lbl { font-size: .85rem; color: rgba(255,255,255,.75); font-weight: 500; text-transform: uppercase; letter-spacing: .05em; }
+
+        /* ── ACHIEVEMENTS ── */
+        .achievements { background: var(--soft); }
+        .ach-strip {
+            display: flex; align-items: center; justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 48px;
+            padding: 36px 48px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .ach-item { display: flex; align-items: center; gap: 12px; }
+        .ach-item i { font-size: 1.4rem; color: var(--rose); }
+        .ach-item span { font-size: .92rem; font-weight: 600; color: var(--dark); }
+        .ach-div { width: 1px; height: 36px; background: #e5e7eb; }
+
+        /* ── CTA BANNER ── */
+        .cta-banner {
+            background: var(--dark);
+            padding: 80px 40px;
+            text-align: center;
+        }
+        .cta-inner { max-width: 640px; margin: 0 auto; }
+        .cta-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .cta-banner h2 span { color: var(--rose); }
+        .cta-banner p { color: rgba(255,255,255,.65); font-size: 1rem; margin-bottom: 32px; line-height: 1.7; }
+        .btn-cta-white {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 40px;
+            background: #fff;
+            color: var(--rose);
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+            transition: all .25s;
+        }
+        .btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,255,255,.2); }
+
+        /* ── FOOTER ── */
+        .footer { background: #f9f7f5; border-top: 1px solid #eee; padding: 72px 40px 0; }
+        .footer-grid {
+            max-width: 1180px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px;
+        }
+        .footer h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem; font-weight: 700; color: var(--dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, var(--rose), var(--violet)) 1;
+            display: inline-block;
+        }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul li a {
+            color: var(--mid);
+            text-decoration: none;
+            font-size: .9rem;
+            display: flex; align-items: center; gap: 8px;
+            transition: all .2s;
+        }
+        .footer ul li a i { color: var(--rose); font-size: .72rem; }
+        .footer ul li a:hover { color: var(--rose); padding-left: 4px; }
+        .footer-contact-item {
+            display: flex; align-items: flex-start; gap: 12px;
+            margin-bottom: 14px;
+        }
+        .footer-icon {
+            width: 36px; height: 36px; min-width: 36px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+            font-size: .8rem;
+        }
+        .footer-contact-item a,
+        .footer-contact-item span {
+            color: var(--mid);
+            font-size: .88rem;
+            text-decoration: none;
+            line-height: 1.5;
+            display: block;
+        }
+        .footer-contact-item a:hover { color: var(--rose); }
+        .footer-bottom {
+            max-width: 1180px; margin: 48px auto 0;
+            border-top: 1px solid #e5e7eb;
+            padding: 24px 0;
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 10px;
+        }
+        .footer-bottom p { font-size: .82rem; color: #9ca3af; }
+        .footer-bottom a { color: var(--rose); text-decoration: none; }
+
+        /* ── BACK TO TOP ── */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 46px; height: 46px;
+            background: var(--rose);
+            color: #fff;
+            border-radius: 50%;
+            display: none;
+            align-items: center; justify-content: center;
+            font-size: .9rem;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(232,41,91,.4);
+            z-index: 200;
+            transition: all .25s;
+        }
+        .back-to-top:hover { background: var(--rose-dk); transform: translateY(-3px); }
+        .back-to-top.show { display: flex; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .about-grid, .discover-grid { grid-template-columns: 1fr; gap: 48px; }
+            .collage { height: 380px; }
+            .mvv-grid { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+            .stat-block { border-right: none; }
+            .feature-chips { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            section { padding: 56px 20px; }
+            .stats-strip { padding: 48px 20px; }
+            .footer { padding: 56px 20px 0; }
+            .cta-banner { padding: 60px 20px; }
+            .navbar { padding: 0 16px; }
+            .topbar { display: none; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 999; }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .feature-chips { grid-template-columns: repeat(2, 1fr); }
+            .mvv-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .stats-grid { grid-template-columns: repeat(2,1fr); gap: 16px; }
+            .stat-num { font-size: 2.2rem; }
+            .ach-strip { flex-direction: column; gap: 16px; padding: 28px 20px; }
+            .ach-div { display: none; }
+            .prog-grid { grid-template-columns: 1fr; }
+            .collage { height: 280px; }
+            .collage-float { bottom: 80px; left: 8px; padding: 10px 14px; }
+            .btn-row { flex-direction: column; align-items: flex-start; }
+            .btn-row .btn-primary-rose, .btn-row .btn-ghost { width: 100%; justify-content: center; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 48px 16px; }
+            .stats-strip { padding: 40px 16px; }
+            .feature-chips { grid-template-columns: 1fr 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+            .stat-num { font-size: 1.9rem; }
+            .img-badge { left: 8px; bottom: 16px; padding: 10px 14px; }
+            .collage { height: 240px; }
+            .mvv-card { padding: 28px 20px; }
+            .footer { padding: 48px 16px 0; }
+            .container { padding: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Spinner -->
+<div id="spinner"><div class="spin-ring"></div></div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <div class="topbar-info">
+        <a href="#"><i class="fas fa-map-marker-alt"></i> Address 356, Mtora Stands</a>
+        <a href="/cdn-cgi/l/email-protection#c3a7acaeaaadaaacada7a6b0b7aaadba83a4aea2aaafeda0acae"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="99fdf6f4f0f7f0f6f7fdfceaedf0f7e0d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a>
+        <a href="tel:+263783796279"><i class="fas fa-phone-alt"></i> +(263) 78 379 6279</a>
+    </div>
+    <div class="topbar-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="index.html" class="nav-brand">
+        <img src="img/dominionlogo.jpg" alt="Dominion Destiny Logo">
+        <div>
+            <div class="brand-name">Dominion Destiny</div>
+            <div class="brand-sub">Primary School</div>
+        </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="program.html">Programs</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="gallery.html">Our Gallery</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+    </ul>
+    <div class="nav-cta">
+        <a href="tel:+263783796279" class="btn-call"><i class="fas fa-headset"></i> Call Us</a>
+        <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+        <div class="hero-eyebrow"><i class="fas fa-school"></i> Our School Profile</div>
+        <h1>About <em>Us</em></h1>
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">/</span>
+            <a href="#">Pages</a>
+            <span class="sep">/</span>
+            <span class="current">About Us</span>
+        </nav>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — Who We Are
+════════════════════════════════════════════ -->
+<section class="about-intro">
+    <div class="container">
+        <div class="about-grid">
+
+            <!-- Image Column -->
+            <div class="about-image-wrap">
+                <div class="img-accent"></div>
+                <img src="img/d5.jpeg" alt="Dominion Destiny Primary School">
+                <div class="img-badge">
+                    <div class="img-badge-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div class="img-badge-text">
+                        <strong>Est. 2018</strong>
+                        <span>Shaping futures</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text Column -->
+            <div>
+                <div class="section-tag"><i class="fas fa-school"></i> Get To Know Us</div>
+                <h2 class="section-heading">About <span>Dominion Destiny</span></h2>
+                <p class="about-text">
+                    <span class="about-dropcap">D</span>ominion Destiny Primary School is dedicated to providing
+                    <span class="hi">quality education</span> in a nurturing environment that fosters
+                    academic excellence and strong character development in every child.
+                </p>
+                <p class="about-text" style="margin-bottom:28px;">
+                    We believe every child deserves the best possible start. Our team of experienced educators combines proven teaching methods with creative learning to unlock each learner's full potential.
+                </p>
+
+                <div class="feature-chips">
+                    <div class="chip">
+                        <div class="chip-icon"><i class="fas fa-futbol"></i></div>
+                        <div class="chip-label"><strong>Sport Activities</strong><span>Multiple sports</span></div>
+                    </div>
+                    <div class="chip">
+                        <div class="chip-icon"><i class="fas fa-tree"></i></div>
+                        <div class="chip-label"><strong>Outdoor Games</strong><span>Fun & learning</span></div>
+                    </div>
+                    <div class="chip">
+                        <div class="chip-icon"><i class="fas fa-apple-alt"></i></div>
+                        <div class="chip-label"><strong>Nutritious Meals</strong><span>Healthy eating</span></div>
+                    </div>
+                    <div class="chip">
+                        <div class="chip-icon"><i class="fas fa-shield-alt"></i></div>
+                        <div class="chip-label"><strong>Highly Secured</strong><span>Safe environment</span></div>
+                    </div>
+                    <div class="chip">
+                        <div class="chip-icon"><i class="fas fa-smile"></i></div>
+                        <div class="chip-label"><strong>Friendly Space</strong><span>Warm & welcoming</span></div>
+                    </div>
+                    <div class="chip">
+                        <div class="chip-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="chip-label"><strong>Qualified Staff</strong><span>Expert educators</span></div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <a href="contact.html" class="btn-primary-rose"><span>Enroll Now</span><i class="fas fa-arrow-right"></i></a>
+                    <a href="#discover" class="btn-ghost"><i class="fas fa-info-circle"></i><span>Learn More</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — Mission / Vision / Values
+════════════════════════════════════════════ -->
+<section class="mvv-section">
+    <div class="container">
+        <div style="text-align:center; max-width:620px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-compass"></i> Our Foundation</div>
+            <h2 class="section-heading">Guided by <span>Purpose &amp; Values</span></h2>
+            <p class="section-lead" style="margin:0 auto;">Everything we do at Dominion Destiny flows from three core commitments that shape our school culture every day.</p>
+        </div>
+        <div class="mvv-grid">
+            <div class="mvv-card">
+                <div class="mvv-icon"><i class="fas fa-bullseye" style="color:var(--rose);"></i></div>
+                <h3>Our Mission</h3>
+                <p>To provide an exceptional, child-centred education that nurtures intellectual curiosity, builds character, and prepares every learner for a purposeful life.</p>
+            </div>
+            <div class="mvv-card">
+                <div class="mvv-icon"><i class="fas fa-eye" style="color:var(--violet);"></i></div>
+                <h3>Our Vision</h3>
+                <p>To be the leading primary school in Zimbabwe, recognised for transformative learning outcomes and a community built on excellence, love, and integrity.</p>
+            </div>
+            <div class="mvv-card">
+                <div class="mvv-icon"><i class="fas fa-heart" style="color:var(--rose);"></i></div>
+                <h3>Our Values</h3>
+                <p>Respect, Responsibility, Resilience and Relationships. These four pillars guide how we teach, how we treat one another, and how we grow together.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — Discover Our Story
+════════════════════════════════════════════ -->
+<section class="discover-section" id="discover">
+    <div class="container">
+        <div class="discover-grid">
+
+            <!-- Photo Collage -->
+            <div class="collage">
+                <img src="img/Capture1.PNG" alt="Children learning" class="collage-main">
+                <img src="img/d5.jpeg" alt="School activities" class="collage-accent">
+                <div class="collage-float">
+                    <div class="collage-float-icon"><i class="fas fa-star"></i></div>
+                    <div>
+                        <strong>100%</strong>
+                        <span>Parent satisfaction</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div>
+                <div class="section-tag"><i class="fas fa-sparkles"></i> Discover Our Story</div>
+                <h2 class="section-heading">We Care For Children &amp; <span>Nurture Future Leaders</span></h2>
+                <p style="color:var(--mid); font-size:1rem; line-height:1.8; margin-bottom:24px;">
+                    At Dominion Destiny, early childhood is not just a phase — it is the foundation of everything. We build that foundation with care, expertise, and joy every single day.
+                </p>
+
+                <div class="prog-grid">
+                    <div class="prog-card">
+                        <div class="prog-header"><i class="fas fa-brain"></i><h4>Cognitive Development</h4></div>
+                        <p>Research-based learning programmes</p>
+                        <div class="prog-bar"><div class="prog-fill" style="width:95%"></div></div>
+                    </div>
+                    <div class="prog-card">
+                        <div class="prog-header"><i class="fas fa-heartbeat"></i><h4>Emotional Growth</h4></div>
+                        <p>Nurturing emotional intelligence</p>
+                        <div class="prog-bar"><div class="prog-fill" style="width:98%"></div></div>
+                    </div>
+                    <div class="prog-card">
+                        <div class="prog-header"><i class="fas fa-running"></i><h4>Physical Activity</h4></div>
+                        <p>Daily exercise &amp; outdoor play</p>
+                        <div class="prog-bar"><div class="prog-fill" style="width:92%"></div></div>
+                    </div>
+                    <div class="prog-card">
+                        <div class="prog-header"><i class="fas fa-paint-brush"></i><h4>Creative Arts</h4></div>
+                        <p>Expression through creativity</p>
+                        <div class="prog-bar"><div class="prog-fill" style="width:96%"></div></div>
+                    </div>
+                </div>
+
+                <div class="btn-row" style="margin-bottom:20px;">
+                    <a href="contact.html" class="btn-primary-rose"><span>Start the Journey</span><i class="fas fa-arrow-right"></i></a>
+                    <a href="#" class="btn-ghost"><i class="fas fa-play-circle"></i><span>Watch Video</span></a>
+                </div>
+
+                <div class="trust-row">
+                    <div class="stars-wrap">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <span class="trust-label">Trusted by 2,000+ parents</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     STATS STRIP
+════════════════════════════════════════════ -->
+<div class="stats-strip">
+    <div class="stats-grid">
+        <div class="stat-block">
+            <div class="stat-num" id="stat1">0</div>
+            <div class="stat-lbl">Years Experience</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num" id="stat2">0</div>
+            <div class="stat-lbl">Happy Children</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num" id="stat3">0</div>
+            <div class="stat-lbl">Expert Teachers</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-num" id="stat4">0</div>
+            <div class="stat-lbl">Activities</div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ACHIEVEMENTS
+════════════════════════════════════════════ -->
+<section class="achievements">
+    <div class="container" style="text-align:center;">
+        <div class="section-tag"><i class="fas fa-trophy"></i> Recognition</div>
+        <h2 class="section-heading">Awards &amp; <span>Achievements</span></h2>
+        <div class="ach-strip">
+            <div class="ach-item"><i class="fas fa-trophy"></i><span>Best Daycare 2024</span></div>
+            <div class="ach-div"></div>
+            <div class="ach-item"><i class="fas fa-certificate"></i><span>Licensed &amp; Certified</span></div>
+            <div class="ach-div"></div>
+            <div class="ach-item"><i class="fas fa-shield-alt"></i><span>Safe Environment</span></div>
+            <div class="ach-div"></div>
+            <div class="ach-item"><i class="fas fa-star"></i><span>Top Rated School</span></div>
+            <div class="ach-div"></div>
+            <div class="ach-item"><i class="fas fa-award"></i><span>Excellence in Education</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BANNER
+════════════════════════════════════════════ -->
+<div class="cta-banner">
+    <div class="cta-inner">
+        <h2>Ready to Give Your Child the <span>Best Start?</span></h2>
+        <p>Join our premium educational programmes today. Enrolment is open — spaces are limited. Secure your child's place and begin an extraordinary journey.</p>
+        <a href="contact.html" class="btn-cta-white"><span>Enroll Now</span><i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<div class="footer">
+    <div class="footer-grid">
+        <!-- Admissions -->
+        <div>
+            <h4>Admissions</h4>
+            <ul>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Admissions Process</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Fees Structure</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Tour Booking</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Online Application</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Uniform Shop</a></li>
+            </ul>
+        </div>
+        <!-- Quick Links -->
+        <div>
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                <li><a href="academics.html"><i class="fas fa-chevron-right"></i> Academics</a></li>
+                <li><a href="service.html"><i class="fas fa-chevron-right"></i> Services &amp; Facilities</a></li>
+                <li><a href="policy.html"><i class="fas fa-chevron-right"></i> Our Policy</a></li>
+            </ul>
+        </div>
+        <!-- Contact -->
+        <div>
+            <h4>Contacts</h4>
+            <div class="footer-contact-item">
+                <div class="footer-icon"><i class="fas fa-phone-alt"></i></div>
+                <div><a href="tel:+263783796279">+(263) 78 379 6279</a><a href="tel:+263779756175">+(263) 77 975 6175</a></div>
+            </div>
+            <div class="footer-contact-item">
+                <div class="footer-icon"><i class="fas fa-envelope"></i></div>
+                <div><a href="/cdn-cgi/l/email-protection#62060d0f0b0c0b0d0c060711160b0c1b22050f030b0e4c010d0f"><span class="__cf_email__" data-cfemail="97f3f8fafef9fef8f9f3f2e4e3fef9eed7f0faf6fefbb9f4f8fa">[email&#160;protected]</span></a></div>
+            </div>
+            <div class="footer-contact-item">
+                <div class="footer-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div><span>Address 356, Mtora Stands</span><span>Nembudziya, ZIMBABWE</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom" style="max-width:1180px;margin:40px auto 0;padding:24px 0;border-top:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <p style="font-size:.82rem;color:#9ca3af;">&copy; <span id="year"></span> Dominion Academy. All Rights Reserved.</p>
+        <p style="font-size:.82rem;color:#9ca3af;">Designed by <a href="tel:+263786980823" style="color:var(--rose);text-decoration:none;">Ain-Graphix +(263) 78 698 0823</a></p>
+    </div>
+</div>
+
+<!-- Back to Top -->
+<a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Spinner
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('spinner').classList.add('hide'), 300);
+    });
+
+    // Copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        btt.classList.toggle('show', window.scrollY > 300);
+    });
+    btt.addEventListener('click', e => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Counter animation
+    function animateCount(el, target, suffix = '') {
+        let start = 0;
+        const step = target / 60;
+        const timer = setInterval(() => {
+            start += step;
+            if (start >= target) { el.textContent = target + suffix; clearInterval(timer); }
+            else el.textContent = Math.floor(start) + suffix;
+        }, 24);
+    }
+
+    const counters = [
+        { id: 'stat1', val: 15,  sfx: '+' },
+        { id: 'stat2', val: 500, sfx: '+' },
+        { id: 'stat3', val: 50,  sfx: '+' },
+        { id: 'stat4', val: 100, sfx: '+' },
+    ];
+    let counted = false;
+    const

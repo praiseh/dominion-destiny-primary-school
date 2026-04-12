@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dominion Destiny - Our Services</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="premium, school, daycare, education services" name="keywords">
+    <meta content="Premium educational services for your child's bright future" name="description">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --rose:     #e8295b;
+            --rose-dk:  #c0204a;
+            --violet:   #6d28d9;
+            --sky:      #0ea5e9;
+            --dark:     #0f0e17;
+            --mid:      #4b5563;
+            --soft:     #f7f5f2;
+            --white:    #ffffff;
+            --shadow:   0 20px 60px rgba(15,14,23,0.12);
+            --shadow-h: 0 32px 80px rgba(15,14,23,0.22);
+            --radius:   28px;
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--soft);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* ── SPINNER ── */
+        #spinner {
+            position: fixed; inset: 0;
+            background: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+            transition: opacity .4s ease;
+        }
+        #spinner.hide { opacity: 0; pointer-events: none; }
+        .spin-ring {
+            width: 48px; height: 48px;
+            border: 4px solid #e5e7eb;
+            border-top-color: var(--rose);
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── TOPBAR ── */
+        .topbar {
+            background: var(--dark);
+            padding: 10px 40px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .topbar-info { display: flex; gap: 28px; flex-wrap: wrap; }
+        .topbar-info a {
+            color: rgba(255,255,255,.75); text-decoration: none;
+            font-size: .82rem; display: flex; align-items: center; gap: 6px;
+            transition: color .25s;
+        }
+        .topbar-info a:hover { color: var(--rose); }
+        .topbar-info i { color: var(--rose); font-size: .75rem; }
+        .topbar-social { display: flex; gap: 10px; }
+        .topbar-social a {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.7); font-size: .75rem; text-decoration: none;
+            transition: all .25s;
+        }
+        .topbar-social a:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: var(--white);
+            padding: 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 2px 24px rgba(15,14,23,0.08);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { display: flex; align-items: center; gap: 12px; padding: 14px 0; text-decoration: none; }
+        .nav-brand img {
+            width: 52px; height: 52px; border-radius: 14px;
+            object-fit: cover; border: 2px solid #f0edf8;
+        }
+        .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem; color: var(--dark); line-height: 1.2; }
+        .brand-sub { font-size: .72rem; color: var(--rose); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+        .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+        .nav-links a {
+            padding: 8px 16px; color: var(--mid); text-decoration: none;
+            font-size: .9rem; font-weight: 500; border-radius: 8px;
+            transition: all .2s; position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--rose); background: rgba(232,41,91,.06); }
+        .nav-links a.active::after {
+            content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px; background: var(--rose); border-radius: 2px;
+        }
+        .btn-call {
+            display: flex; align-items: center; gap: 8px;
+            padding: 9px 20px; background: var(--rose); color: #fff;
+            border-radius: 40px; text-decoration: none; font-size: .85rem;
+            font-weight: 600; transition: all .25s;
+        }
+        .btn-call:hover { background: var(--rose-dk); transform: translateY(-1px); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; transition: all .3s; }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            position: relative; min-height: 55vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background: var(--dark);
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('img/hero-img.png');
+            background-size: cover; background-position: center; opacity: .35;
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(232,41,91,.25) 0%, rgba(109,40,217,.25) 100%);
+        }
+        .page-hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 60px 20px;
+            animation: fadeUp .8s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity:0; transform: translateY(24px); }
+            to   { opacity:1; transform: translateY(0); }
+        }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 8px 22px; background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.2); backdrop-filter: blur(8px);
+            border-radius: 40px; color: rgba(255,255,255,.9);
+            font-size: .82rem; font-weight: 600; letter-spacing: .06em;
+            text-transform: uppercase; margin-bottom: 20px;
+        }
+        .hero-eyebrow i { color: var(--rose); }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5rem);
+            font-weight: 800; color: #fff; line-height: 1.05;
+            margin-bottom: 18px; text-shadow: 0 4px 24px rgba(0,0,0,.3);
+        }
+        .page-hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #fff 30%, var(--rose) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .breadcrumb {
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; font-size: .88rem; color: rgba(255,255,255,.65);
+        }
+        .breadcrumb a { color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+        .breadcrumb a:hover { color: var(--rose); }
+        .breadcrumb .sep { opacity: .4; }
+        .breadcrumb .current { color: #fff; font-weight: 600; }
+
+        /* ── SHARED SECTION ── */
+        section { padding: 90px 40px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--rose); font-size: .8rem; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
+        }
+        .section-tag::before, .section-tag::after {
+            content: ''; flex: 1; min-width: 30px; height: 1px;
+            background: currentColor; opacity: .4;
+        }
+        h2.section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--dark); line-height: 1.15; margin-bottom: 16px;
+        }
+        h2.section-heading span {
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-sub { color: var(--mid); font-size: 1.05rem; line-height: 1.75; max-width: 640px; margin: 0 auto; }
+
+        /* ── SERVICE CARDS ── */
+        .services-section { background: var(--white); }
+        .service-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; margin-top: 56px;
+        }
+        .service-card {
+            background: var(--soft); border-radius: var(--radius);
+            padding: 36px 24px; text-align: center;
+            border: 1px solid #ece9e4;
+            transition: all .35s cubic-bezier(.175,.885,.32,1.275);
+            position: relative; overflow: hidden; cursor: pointer;
+        }
+        .service-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 3px; background: linear-gradient(90deg, var(--rose), var(--violet));
+            transform: scaleX(0); transform-origin: left; transition: transform .35s ease;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: var(--shadow); background: var(--white); }
+        .service-card:hover::before { transform: scaleX(1); }
+        .svc-icon {
+            width: 80px; height: 80px; border-radius: 24px;
+            background: linear-gradient(135deg, rgba(232,41,91,.12), rgba(109,40,217,.12));
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 24px; font-size: 2rem;
+            transition: all .35s ease;
+        }
+        .svc-icon i { color: var(--rose); transition: all .35s ease; }
+        .service-card:hover .svc-icon {
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            box-shadow: 0 12px 32px rgba(232,41,91,.3);
+        }
+        .service-card:hover .svc-icon i { color: #fff; }
+        .svc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem; font-weight: 700; color: var(--dark);
+            margin-bottom: 12px; transition: color .25s;
+        }
+        .service-card:hover .svc-title { color: var(--rose); }
+        .svc-features { list-style: none; margin-bottom: 16px; text-align: left; }
+        .svc-features li {
+            display: flex; align-items: center; gap: 8px;
+            padding: 7px 12px; margin-bottom: 6px;
+            background: rgba(232,41,91,.06); border-radius: 30px;
+            font-size: .88rem; color: var(--mid); font-weight: 500;
+            transition: all .2s;
+        }
+        .svc-features li:hover { background: rgba(232,41,91,.12); transform: translateX(4px); }
+        .svc-features li i { color: var(--rose); font-size: .75rem; }
+        .svc-desc { font-size: .9rem; color: var(--mid); line-height: 1.7; margin-bottom: 20px; }
+        .btn-svc {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 24px; border: 2px solid var(--rose);
+            border-radius: 40px; color: var(--rose); text-decoration: none;
+            font-size: .88rem; font-weight: 600; transition: all .25s; background: transparent;
+        }
+        .btn-svc:hover { background: var(--rose); color: #fff; }
+        .btn-svc i { transition: transform .25s; }
+        .btn-svc:hover i { transform: translateX(4px); }
+
+        /* ── OFFER CARDS (Transport & Meals) ── */
+        .offer-section { background: var(--soft); }
+        .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 56px; }
+        .offer-card {
+            position: relative; border-radius: 36px; overflow: hidden;
+            min-height: 620px; box-shadow: var(--shadow);
+            transition: all .45s cubic-bezier(.175,.885,.32,1.275); cursor: pointer;
+        }
+        .offer-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-h); }
+        /* background layers */
+        .offer-bg {
+            position: absolute; inset: 0;
+            background-size: cover; background-position: center;
+            transition: transform 8s ease;
+        }
+        .offer-card:hover .offer-bg { transform: scale(1.07); }
+        .offer-bg-transport { background-image: url('img/transport.jpg'); }
+        .offer-bg-meals    { background-image: url('img/meals.jpg'); background-color: #2d5016; }
+        .offer-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(160deg, rgba(10,10,26,.55) 0%, rgba(10,10,26,.72) 100%);
+        }
+        .offer-glow {
+            position: absolute; inset: 0;
+            background: radial-gradient(circle at 25% 35%, rgba(232,41,91,.18), transparent 55%),
+                        radial-gradient(circle at 75% 70%, rgba(109,40,217,.18), transparent 55%);
+        }
+        /* animated border on hover */
+        .offer-card::after {
+            content: ''; position: absolute; inset: 0;
+            border-radius: 36px;
+            background: linear-gradient(135deg, var(--rose), var(--violet), var(--sky), var(--rose));
+            background-size: 300% 300%;
+            padding: 2px;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor; mask-composite: exclude;
+            opacity: 0; transition: opacity .35s; pointer-events: none;
+            animation: borderGlow 3s linear infinite;
+        }
+        .offer-card:hover::after { opacity: 1; }
+        @keyframes borderGlow { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+        /* content */
+        .offer-content {
+            position: relative; z-index: 2; padding: 48px 36px;
+            color: #fff; height: 100%;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .offer-icon-box {
+            width: 90px; height: 90px; border-radius: 26px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.4rem; color: #fff; margin-bottom: 28px;
+            box-shadow: 0 16px 40px rgba(232,41,91,.4);
+            transition: all .45s ease;
+            position: relative;
+        }
+        .offer-icon-box::after {
+            content: ''; position: absolute; inset: -8px;
+            border: 2px dashed rgba(255,255,255,.3);
+            border-radius: 34px;
+            animation: iconRing 10s linear infinite;
+        }
+        @keyframes iconRing { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .offer-card:hover .offer-icon-box { transform: rotate(360deg) scale(1.1); box-shadow: 0 24px 56px rgba(232,41,91,.55); }
+        .offer-title-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem; font-weight: 700; margin-bottom: 20px;
+            position: relative; padding-bottom: 16px;
+        }
+        .offer-title-text::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 60px; height: 3px; border-radius: 3px;
+            background: linear-gradient(90deg, var(--rose), var(--violet));
+            transition: width .35s ease;
+        }
+        .offer-card:hover .offer-title-text::after { width: 100px; }
+        .offer-features {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; width: 100%; margin-bottom: 20px;
+        }
+        .offer-feat {
+            display: flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,.15); backdrop-filter: blur(4px);
+            padding: 10px 14px; border-radius: 30px; font-size: .88rem;
+            border: 1px solid rgba(255,255,255,.2); transition: all .25s;
+        }
+        .offer-feat:hover { background: rgba(255,255,255,.25); transform: translateX(4px); }
+        .offer-feat i { color: var(--rose); font-size: .85rem; }
+        .offer-desc {
+            font-size: .95rem; line-height: 1.8; margin-bottom: 24px;
+            color: rgba(255,255,255,.88);
+        }
+        .offer-stats {
+            display: flex; justify-content: space-around; width: 100%;
+            padding: 18px 0; margin-bottom: 28px;
+            border-top: 1px solid rgba(255,255,255,.2);
+            border-bottom: 1px solid rgba(255,255,255,.2);
+        }
+        .ostat-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--rose); line-height: 1; display: block; }
+        .ostat-lbl { font-size: .75rem; text-transform: uppercase; letter-spacing: .05em; opacity: .75; display: block; margin-top: 4px; }
+        .btn-offer {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 32px; background: linear-gradient(135deg, var(--rose), var(--violet));
+            border-radius: 50px; color: #fff; text-decoration: none;
+            font-weight: 600; font-size: .95rem; transition: all .3s ease;
+            box-shadow: 0 8px 24px rgba(232,41,91,.35); margin-top: auto;
+            position: relative; overflow: hidden;
+        }
+        .btn-offer::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+            transition: left .5s ease;
+        }
+        .btn-offer:hover::before { left: 100%; }
+        .btn-offer:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 16px 40px rgba(232,41,91,.5); }
+        .btn-offer i { transition: transform .3s; }
+        .btn-offer:hover i { transform: translateX(5px); }
+
+        /* ── INFO BANNER ── */
+        .info-banner {
+            background: linear-gradient(135deg, var(--rose), var(--rose-dk) 40%, var(--violet));
+            border-radius: var(--radius);
+            padding: 40px 48px;
+            margin-top: 48px;
+            display: flex; align-items: center; gap: 28px;
+            flex-wrap: wrap;
+            position: relative; overflow: hidden;
+        }
+        .info-banner::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 80% 50%, rgba(255,255,255,.12), transparent 60%);
+        }
+        .ib-icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: rgba(255,255,255,.2); display: flex; align-items: center;
+            justify-content: center; font-size: 2rem; color: #fff;
+            animation: ibPulse 2s ease-in-out infinite; flex-shrink: 0; position: relative; z-index: 1;
+        }
+        @keyframes ibPulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.1); box-shadow: 0 0 28px rgba(255,255,255,.3); } }
+        .ib-text { flex: 1; position: relative; z-index: 1; }
+        .ib-text h4 { color: #fff; font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; margin-bottom: 4px; }
+        .ib-text p { color: rgba(255,255,255,.82); font-size: .92rem; }
+        .btn-ib {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 13px 28px; background: #fff; border-radius: 50px;
+            color: var(--rose); font-weight: 700; font-size: .9rem;
+            text-decoration: none; transition: all .25s;
+            box-shadow: 0 8px 24px rgba(0,0,0,.15); position: relative; z-index: 1;
+        }
+        .btn-ib:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 16px 36px rgba(0,0,0,.22); }
+
+        /* ── CTA BANNER ── */
+        .cta-section { background: var(--dark); padding: 80px 40px; text-align: center; }
+        .cta-inner { max-width: 640px; margin: 0 auto; }
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700; color: #fff; margin-bottom: 16px;
+        }
+        .cta-section h2 span { color: var(--rose); }
+        .cta-section p { color: rgba(255,255,255,.65); font-size: 1rem; margin-bottom: 32px; line-height: 1.7; }
+        .btn-cta-w {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 16px 40px; background: var(--rose); color: #fff;
+            border-radius: 40px; text-decoration: none; font-weight: 700;
+            font-size: .95rem; transition: all .25s;
+        }
+        .btn-cta-w:hover { background: var(--rose-dk); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(232,41,91,.4); }
+
+        /* ── FOOTER ── */
+        .footer { background: #f9f7f5; border-top: 1px solid #eee; padding: 72px 40px 0; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 1200px; margin: 0 auto; }
+        .footer h4 {
+            font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700;
+            color: var(--dark); margin-bottom: 20px; padding-bottom: 10px;
+            border-bottom: 2px solid; display: inline-block;
+            border-image: linear-gradient(90deg, var(--rose), var(--violet)) 1;
+        }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul li a {
+            color: var(--mid); text-decoration: none; font-size: .9rem;
+            display: flex; align-items: center; gap: 8px; transition: all .2s;
+        }
+        .footer ul li a i { color: var(--rose); font-size: .72rem; }
+        .footer ul li a:hover { color: var(--rose); padding-left: 4px; }
+        .fcontact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+        .ficon {
+            width: 36px; height: 36px; min-width: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            display: flex; align-items: center; justify-content: center; color: #fff; font-size: .8rem;
+        }
+        .fcontact-item a, .fcontact-item span {
+            color: var(--mid); font-size: .88rem; text-decoration: none; line-height: 1.5; display: block;
+        }
+        .fcontact-item a:hover { color: var(--rose); }
+        .footer-bottom {
+            max-width: 1200px; margin: 40px auto 0;
+            border-top: 1px solid #e5e7eb; padding: 24px 0;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+        }
+        .footer-bottom p { font-size: .82rem; color: #9ca3af; }
+        .footer-bottom a { color: var(--rose); text-decoration: none; }
+
+        /* ── BACK TO TOP ── */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 46px; height: 46px; background: var(--rose); color: #fff;
+            border-radius: 50%; display: none; align-items: center; justify-content: center;
+            font-size: .9rem; text-decoration: none;
+            box-shadow: 0 8px 24px rgba(232,41,91,.4); z-index: 200; transition: all .25s;
+        }
+        .back-to-top:hover { background: var(--rose-dk); transform: translateY(-3px); }
+        .back-to-top.show { display: flex; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) {
+            .service-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .offer-grid { grid-template-columns: 1fr; max-width: 580px; margin-left: auto; margin-right: auto; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .offer-card { min-height: 480px; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 56px 20px; }
+            .topbar { display: none; }
+            .navbar { padding: 0 16px; position: sticky; top: 0; z-index: 100; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 999; }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .service-grid { grid-template-columns: 1fr; }
+            .offer-features { grid-template-columns: 1fr; }
+            .info-banner { flex-direction: column; text-align: center; padding: 32px 24px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .cta-section { padding: 60px 20px; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 48px 16px; }
+            .container { padding: 0; }
+            .navbar { padding: 0 14px; }
+            .offer-card { min-height: 400px; }
+            .cta-section { padding: 48px 16px; }
+            .service-card { padding: 28px 18px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Spinner -->
+<div id="spinner"><div class="spin-ring"></div></div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <div class="topbar-info">
+        <a href="#"><i class="fas fa-map-marker-alt"></i> Address 356, Mtora Stands</a>
+        <a href="/cdn-cgi/l/email-protection#8eeae1e3e7e0e7e1e0eaebfdfae7e0f7cee9e3efe7e2a0ede1e3"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="ea8e858783848385848e8f999e838493aa8d878b8386c4898587">[email&#160;protected]</span></a>
+        <a href="tel:+263783796279"><i class="fas fa-phone-alt"></i> +(263) 78 379 6279</a>
+    </div>
+    <div class="topbar-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="index.html" class="nav-brand">
+        <img src="img/dominionlogo.jpg" alt="Dominion Destiny Logo">
+        <div>
+            <div class="brand-name">Dominion Destiny</div>
+            <div class="brand-sub">Primary School</div>
+        </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="service.html" class="active">Services</a></li>
+        <li><a href="program.html">Programs</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="gallery.html">Our Gallery</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <a href="tel:+263783796279" class="btn-call"><i class="fas fa-headset"></i> Call Us</a>
+        <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+        <div class="hero-eyebrow"><i class="fas fa-gem"></i> Premium Services</div>
+        <h1>Our <em>Services</em></h1>
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">/</span>
+            <a href="#">Pages</a>
+            <span class="sep">/</span>
+            <span class="current">Services</span>
+        </nav>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — Core Service Cards
+════════════════════════════════════════════ -->
+<section class="services-section">
+    <div class="container">
+        <div style="text-align:center; max-width:660px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-gem"></i> What We Offer</div>
+            <h2 class="section-heading">Excellence in <span>Education</span></h2>
+            <p class="section-sub">Discover our comprehensive range of premium educational services designed to nurture young minds and build bright futures.</p>
+        </div>
+
+        <div class="service-grid">
+
+            <!-- Card 1: Study & Game -->
+            <div class="service-card">
+                <div class="svc-icon"><i class="fas fa-gamepad"></i></div>
+                <h3 class="svc-title">Study &amp; Game</h3>
+                <ul class="svc-features">
+                    <li><i class="fas fa-check-circle"></i> Interactive Learning</li>
+                    <li><i class="fas fa-check-circle"></i> Sports Activities</li>
+                    <li><i class="fas fa-check-circle"></i> Creative Play</li>
+                </ul>
+                <p class="svc-desc">Perfect balance of academic learning and recreational activities for holistic development of every child.</p>
+                <a href="#" class="btn-svc"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Card 2: A to Z Programs -->
+            <div class="service-card">
+                <div class="svc-icon"><i class="fas fa-sort-alpha-down"></i></div>
+                <h3 class="svc-title">A to Z Programs</h3>
+                <ul class="svc-features">
+                    <li><i class="fas fa-check-circle"></i> Comprehensive Curriculum</li>
+                    <li><i class="fas fa-check-circle"></i> Age-Appropriate</li>
+                    <li><i class="fas fa-check-circle"></i> Progressive Learning</li>
+                </ul>
+                <p class="svc-desc">Structured programmes covering everything from early literacy to advanced concepts with measurable outcomes.</p>
+                <a href="#" class="btn-svc"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Card 3: Expert Teachers -->
+            <div class="service-card">
+                <div class="svc-icon"><i class="fas fa-users"></i></div>
+                <h3 class="svc-title">Expert Teachers</h3>
+                <ul class="svc-features">
+                    <li><i class="fas fa-check-circle"></i> Qualified Educators</li>
+                    <li><i class="fas fa-check-circle"></i> Personal Attention</li>
+                    <li><i class="fas fa-check-circle"></i> Modern Methods</li>
+                </ul>
+                <p class="svc-desc">Dedicated teachers who inspire, guide, and nurture every child's unique potential with patience and passion.</p>
+                <a href="#" class="btn-svc"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Card 4: Mental Health -->
+            <div class="service-card">
+                <div class="svc-icon"><i class="fas fa-heart"></i></div>
+                <h3 class="svc-title">Mental Health</h3>
+                <ul class="svc-features">
+                    <li><i class="fas fa-check-circle"></i> Counselling Support</li>
+                    <li><i class="fas fa-check-circle"></i> Emotional Wellbeing</li>
+                    <li><i class="fas fa-check-circle"></i> Safe Environment</li>
+                </ul>
+                <p class="svc-desc">Comprehensive mental health support ensuring the emotional wellbeing of every child in our care.</p>
+                <a href="#" class="btn-svc"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — Transport & Meals
+════════════════════════════════════════════ -->
+<section class="offer-section">
+    <div class="container">
+        <div style="text-align:center; max-width:660px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-star"></i> Premium Facilities</div>
+            <h2 class="section-heading">Extra <span>Care</span> Services</h2>
+            <p class="section-sub">Beyond education, we provide comfortable transportation and nutritious meals for your child's complete wellbeing.</p>
+        </div>
+
+        <div class="offer-grid">
+
+            <!-- Transport Card -->
+            <div class="offer-card">
+                <div class="offer-bg offer-bg-transport"></div>
+                <div class="offer-overlay"></div>
+                <div class="offer-glow"></div>
+                <div class="offer-content">
+                    <div class="offer-icon-box"><i class="fas fa-bus"></i></div>
+                    <h3 class="offer-title-text">Safe Transport</h3>
+                    <div class="offer-features">
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> GPS Tracked Buses</div>
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Trained Attendants</div>
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Door-to-Door Service</div>
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Safety First Approach</div>
+                    </div>
+                    <p class="offer-desc">Comfortable, safe, and reliable transportation with real-time tracking and caring attendants ensuring your child's journey is as pleasant as their day at school.</p>
+                    <div class="offer-stats">
+                        <div><span class="ostat-num">15+</span><span class="ostat-lbl">Routes</span></div>
+                        <div><span class="ostat-num">100%</span><span class="ostat-lbl">Safety Record</span></div>
+                        <div><span class="ostat-num">24/7</span><span class="ostat-lbl">Tracking</span></div>
+                    </div>
+                    <a href="#" class="btn-offer"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Meals Card -->
+            <div class="offer-card">
+                <div class="offer-bg offer-bg-meals"></div>
+                <div class="offer-overlay"></div>
+                <div class="offer-glow"></div>
+                <div class="offer-content">
+                    <div class="offer-icon-box"><i class="fas fa-utensils"></i></div>
+                    <h3 class="offer-title-text">Nutritious Meals</h3>
+                    <div class="offer-features">
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Balanced Diet</div>
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Fresh Ingredients</div>
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Dietary Options</div>
+                        <div class="offer-feat"><i class="fas fa-check-circle"></i> Hygienic Kitchen</div>
+                    </div>
+                    <p class="offer-desc">Delicious, nutritionally balanced meals prepared fresh daily in our hygienic kitchen. We accommodate dietary requirements and introduce children to healthy eating habits.</p>
+                    <div class="offer-stats">
+                        <div><span class="ostat-num">3</span><span class="ostat-lbl">Meals Daily</span></div>
+                        <div><span class="ostat-num">100%</span><span class="ostat-lbl">Fresh</span></div>
+                        <div><span class="ostat-num">10+</span><span class="ostat-lbl">Menu Options</span></div>
+                    </div>
+                    <a href="#" class="btn-offer"><span>View Menu</span><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Info Banner -->
+        <div class="info-banner">
+            <div class="ib-icon"><i class="fas fa-shield-alt"></i></div>
+            <div class="ib-text">
+                <h4>Your Child's Comfort is Our Priority</h4>
+                <p>Both transport and meals are included in our comprehensive care package — peace of mind for every parent.</p>
+            </div>
+            <a href="contact.html" class="btn-ib"><span>Inquire Now</span><i class="fas fa-phone-alt"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BANNER
+════════════════════════════════════════════ -->
+<div class="cta-section">
+    <div class="cta-inner">
+        <h2>Ready to Give Your Child the <span>Best Start?</span></h2>
+        <p>Join our premium educational programmes today. Enrolment is open — spaces are limited. Secure your child's place and begin an extraordinary journey.</p>
+        <a href="contact.html" class="btn-cta-w"><span>Enroll Now</span><i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<div class="footer">
+    <div class="footer-grid">
+        <!-- Admissions -->
+        <div>
+            <h4>Admissions</h4>
+            <ul>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Admissions Process</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Fees Structure</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Tour Booking</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Online Application</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Uniform Shop</a></li>
+            </ul>
+        </div>
+        <!-- Quick Links -->
+        <div>
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                <li><a href="academics.html"><i class="fas fa-chevron-right"></i> Academics</a></li>
+                <li><a href="service.html"><i class="fas fa-chevron-right"></i> Services &amp; Facilities</a></li>
+                <li><a href="policy.html"><i class="fas fa-chevron-right"></i> Our Policy</a></li>
+            </ul>
+        </div>
+        <!-- Contacts -->
+        <div>
+            <h4>Contacts</h4>
+            <div class="fcontact-item">
+                <div class="ficon"><i class="fas fa-phone-alt"></i></div>
+                <div>
+                    <a href="tel:+263783796279">+(263) 78 379 6279</a>
+                    <a href="tel:+263779756175">+(263) 77 975 6175</a>
+                </div>
+            </div>
+            <div class="fcontact-item">
+                <div class="ficon"><i class="fas fa-envelope"></i></div>
+                <div><a href="/cdn-cgi/l/email-protection#85e1eae8ecebeceaebe1e0f6f1ecebfcc5e2e8e4ece9abe6eae8"><span class="__cf_email__" data-cfemail="ee8a818387808781808a8b9d9a878097ae89838f8782c08d8183">[email&#160;protected]</span></a></div>
+            </div>
+            <div class="fcontact-item">
+                <div class="ficon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                    <span>Address 356, Mtora Stands</span>
+                    <span>Nembudziya, ZIMBABWE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Dominion Academy. All Rights Reserved.</p>
+        <p>Designed by <a href="tel:+263786980823">Ain-Graphix +(263) 78 698 0823</a></p>
+    </div>
+</div>
+
+<!-- Back to Top -->
+<a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Spinner
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('spinner').classList.add('hide'), 300);
+    })

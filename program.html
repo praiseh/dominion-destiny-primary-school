@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dominion Destiny - Academic Programs (ECD to Grade 7)</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="school, education, primary school, ecd to grade 7, early childhood development" name="keywords">
+    <meta content="Complete education from ECD to Grade 7 at Dominion Destiny Academy" name="description">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --rose:    #e8295b;
+            --rose-dk: #c0204a;
+            --violet:  #6d28d9;
+            --amber:   #f59e0b;
+            --emerald: #10b981;
+            --blue:    #3b82f6;
+            --dark:    #0f0e17;
+            --mid:     #4b5563;
+            --soft:    #f7f5f2;
+            --white:   #ffffff;
+            --shadow:  0 20px 60px rgba(15,14,23,0.10);
+            --shadow-h:0 32px 80px rgba(15,14,23,0.18);
+            --radius:  28px;
+        }
+
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'DM Sans', sans-serif; background: var(--soft); color: var(--dark); overflow-x: hidden; }
+
+        /* ── SPINNER ── */
+        #spinner {
+            position: fixed; inset: 0; background: var(--white);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999; transition: opacity .4s ease;
+        }
+        #spinner.hide { opacity: 0; pointer-events: none; }
+        .spin-ring {
+            width: 48px; height: 48px; border: 4px solid #e5e7eb;
+            border-top-color: var(--rose); border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ── TOPBAR ── */
+        .topbar {
+            background: var(--dark); padding: 10px 40px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .topbar-info { display: flex; gap: 28px; flex-wrap: wrap; }
+        .topbar-info a {
+            color: rgba(255,255,255,.75); text-decoration: none;
+            font-size: .82rem; display: flex; align-items: center; gap: 6px; transition: color .25s;
+        }
+        .topbar-info a:hover { color: var(--rose); }
+        .topbar-info i { color: var(--rose); font-size: .75rem; }
+        .topbar-social { display: flex; gap: 10px; }
+        .topbar-social a {
+            width: 30px; height: 30px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,.7); font-size: .75rem; text-decoration: none; transition: all .25s;
+        }
+        .topbar-social a:hover { background: var(--rose); border-color: var(--rose); color: #fff; }
+
+        /* ── NAVBAR ── */
+        .navbar {
+            background: var(--white); padding: 0 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: 0 2px 24px rgba(15,14,23,0.08);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .nav-brand { display: flex; align-items: center; gap: 12px; padding: 14px 0; text-decoration: none; }
+        .nav-brand img { width: 52px; height: 52px; border-radius: 14px; object-fit: cover; border: 2px solid #f0edf8; }
+        .brand-name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem; color: var(--dark); line-height: 1.2; }
+        .brand-sub { font-size: .72rem; color: var(--rose); font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
+        .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+        .nav-links a {
+            padding: 8px 16px; color: var(--mid); text-decoration: none;
+            font-size: .9rem; font-weight: 500; border-radius: 8px;
+            transition: all .2s; position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--rose); background: rgba(232,41,91,.06); }
+        .nav-links a.active::after {
+            content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%);
+            width: 20px; height: 2px; background: var(--rose); border-radius: 2px;
+        }
+        .btn-call {
+            display: flex; align-items: center; gap: 8px; padding: 9px 20px;
+            background: var(--rose); color: #fff; border-radius: 40px; text-decoration: none;
+            font-size: .85rem; font-weight: 600; transition: all .25s;
+        }
+        .btn-call:hover { background: var(--rose-dk); transform: translateY(-1px); }
+        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+        .hamburger span { width: 24px; height: 2px; background: var(--dark); border-radius: 2px; }
+
+        /* ── PAGE HERO ── */
+        .page-hero {
+            position: relative; min-height: 55vh;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden; background: var(--dark);
+        }
+        .page-hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('img/program-header.jpg');
+            background-size: cover; background-position: center; opacity: .35;
+        }
+        .page-hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(232,41,91,.22), rgba(109,40,217,.22));
+        }
+        .page-hero-content {
+            position: relative; z-index: 2; text-align: center; padding: 60px 20px;
+            animation: fadeUp .8s ease both;
+        }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+        .hero-eyebrow {
+            display: inline-flex; align-items: center; gap: 10px; padding: 8px 22px;
+            background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+            backdrop-filter: blur(8px); border-radius: 40px; color: rgba(255,255,255,.9);
+            font-size: .82rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px;
+        }
+        .hero-eyebrow i { color: var(--rose); }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 7vw, 5rem); font-weight: 800; color: #fff;
+            line-height: 1.05; margin-bottom: 18px; text-shadow: 0 4px 24px rgba(0,0,0,.3);
+        }
+        .page-hero h1 em {
+            font-style: normal;
+            background: linear-gradient(135deg, #fff 30%, var(--rose) 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .breadcrumb {
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px; font-size: .88rem; color: rgba(255,255,255,.65);
+        }
+        .breadcrumb a { color: rgba(255,255,255,.65); text-decoration: none; transition: color .2s; }
+        .breadcrumb a:hover { color: var(--rose); }
+        .breadcrumb .sep { opacity: .4; }
+        .breadcrumb .current { color: #fff; font-weight: 600; }
+
+        /* ── SHARED ── */
+        section { padding: 90px 40px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            color: var(--rose); font-size: .8rem; font-weight: 700;
+            letter-spacing: .1em; text-transform: uppercase; margin-bottom: 14px;
+        }
+        .section-tag::before, .section-tag::after { content:''; flex:1; min-width:30px; height:1px; background:currentColor; opacity:.4; }
+        h2.section-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: var(--dark); line-height: 1.15; margin-bottom: 16px;
+        }
+        h2.section-heading span {
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .section-sub { color: var(--mid); font-size: 1.05rem; line-height: 1.75; max-width: 680px; margin: 0 auto; }
+
+        /* ── GRADE FILTER NAV ── */
+        .filter-nav {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+            margin: 48px 0 52px; padding: 14px 20px;
+            background: var(--white); border-radius: 60px;
+            box-shadow: 0 4px 24px rgba(15,14,23,0.08);
+        }
+        .filter-btn {
+            padding: 10px 24px; border: none; border-radius: 40px;
+            background: transparent; color: var(--mid); font-weight: 600; font-size: .9rem;
+            cursor: pointer; transition: all .25s; font-family: 'DM Sans', sans-serif;
+        }
+        .filter-btn:hover { color: var(--rose); background: rgba(232,41,91,.07); }
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            color: #fff; box-shadow: 0 8px 20px rgba(232,41,91,.3);
+        }
+
+        /* ── GRADE CARDS ── */
+        .programs-section { background: var(--white); }
+        .grade-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 16px;
+        }
+        .grade-card {
+            background: var(--soft); border-radius: var(--radius); overflow: hidden;
+            box-shadow: var(--shadow); transition: all .38s cubic-bezier(.175,.885,.32,1.275);
+            position: relative; cursor: pointer;
+        }
+        .grade-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-h); }
+        .grade-card.hidden { display: none; }
+
+        /* coloured headers */
+        .gc-header {
+            padding: 32px 20px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .gc-header.ecd     { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+        .gc-header.infant  { background: linear-gradient(135deg, #34d399, #10b981); }
+        .gc-header.junior  { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+        .gc-header.senior  { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+
+        .gc-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem; font-weight: 800; color: #fff; line-height: 1;
+            margin-bottom: 6px; text-shadow: 2px 2px 8px rgba(0,0,0,.2);
+        }
+        .gc-lbl { font-size: 1.1rem; color: rgba(255,255,255,.92); font-weight: 600; }
+        .gc-bg-icon {
+            position: absolute; bottom: -16px; right: -12px;
+            font-size: 5rem; color: rgba(255,255,255,.18); transform: rotate(12deg);
+        }
+
+        .gc-body { padding: 24px; background: var(--white); }
+        .gc-age {
+            display: inline-block; padding: 5px 14px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            color: #fff; border-radius: 30px; font-size: .82rem; font-weight: 600; margin-bottom: 14px;
+        }
+        .gc-features { list-style: none; margin-bottom: 20px; }
+        .gc-features li {
+            display: flex; align-items: center; gap: 9px;
+            padding: 7px 0; border-bottom: 1px solid #f3f4f6;
+            font-size: .9rem; color: var(--mid);
+        }
+        .gc-features li:last-child { border-bottom: none; }
+        .gc-features li i { color: var(--rose); font-size: .78rem; flex-shrink: 0; }
+        .btn-grade {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 11px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            border: none; border-radius: 40px; color: #fff;
+            font-weight: 600; font-size: .88rem; text-decoration: none; cursor: pointer;
+            transition: all .25s; font-family: 'DM Sans', sans-serif;
+        }
+        .btn-grade:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(232,41,91,.3); }
+        .btn-grade i { transition: transform .25s; }
+        .btn-grade:hover i { transform: translateX(4px); }
+
+        /* ── LEARNING TIMELINE ── */
+        .timeline-section { background: var(--soft); }
+        .timeline-wrap {
+            background: var(--white); border-radius: var(--radius);
+            padding: 48px 40px; box-shadow: var(--shadow);
+        }
+        .tl-title {
+            font-family: 'Playfair Display', serif; text-align: center;
+            font-size: 1.9rem; font-weight: 700; color: var(--dark); margin-bottom: 40px;
+        }
+        .timeline {
+            display: flex; align-items: center; justify-content: space-between;
+            position: relative; padding: 12px 0; gap: 0;
+        }
+        .timeline::before {
+            content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--violet), var(--blue));
+            transform: translateY(-50%); z-index: 0; border-radius: 4px;
+        }
+        .tl-node {
+            position: relative; z-index: 1; display: flex; flex-direction: column;
+            align-items: center; gap: 4px;
+        }
+        .tl-bubble {
+            width: 72px; height: 72px; border-radius: 50%; background: var(--white);
+            border: 3px solid #e5e7eb;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-weight: 700; cursor: pointer; transition: all .3s;
+            box-shadow: 0 4px 16px rgba(15,14,23,.1);
+        }
+        .tl-bubble .tl-grade { font-size: 1rem; font-weight: 800; color: var(--rose); line-height: 1; }
+        .tl-bubble .tl-age   { font-size: .65rem; color: var(--mid); }
+        .tl-bubble:hover, .tl-bubble.active {
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            border-color: transparent; box-shadow: 0 8px 24px rgba(232,41,91,.35);
+        }
+        .tl-bubble:hover .tl-grade, .tl-bubble.active .tl-grade,
+        .tl-bubble:hover .tl-age,   .tl-bubble.active .tl-age { color: #fff; }
+        .tl-label { font-size: .78rem; font-weight: 600; color: var(--mid); margin-top: 8px; text-align: center; }
+
+        /* ── CURRICULUM GRID ── */
+        .curriculum-section { background: var(--white); }
+        .curr-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 52px;
+        }
+        .curr-card {
+            text-align: center; padding: 32px 20px; background: var(--soft);
+            border-radius: var(--radius); transition: all .3s;
+            border: 1px solid #ece9e4; position: relative; overflow: hidden;
+        }
+        .curr-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--rose), var(--violet));
+            transform: scaleX(0); transform-origin: left; transition: transform .3s;
+        }
+        .curr-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); background: var(--white); }
+        .curr-card:hover::before { transform: scaleX(1); }
+        .curr-icon {
+            width: 72px; height: 72px; border-radius: 50%;
+            background: linear-gradient(135deg, rgba(232,41,91,.12), rgba(109,40,217,.12));
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; font-size: 1.8rem; transition: all .3s;
+        }
+        .curr-icon i { color: var(--rose); transition: color .3s; }
+        .curr-card:hover .curr-icon { background: linear-gradient(135deg, var(--rose), var(--violet)); box-shadow: 0 10px 28px rgba(232,41,91,.3); }
+        .curr-card:hover .curr-icon i { color: #fff; }
+        .curr-card h4 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+        .curr-card p { color: var(--mid); font-size: .88rem; line-height: 1.65; }
+
+        /* ── SUBJECT SHOWCASE ── */
+        .subjects-section { background: var(--soft); }
+        .subjects-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px;
+        }
+        .subj-card {
+            background: var(--white); border-radius: var(--radius); padding: 32px;
+            box-shadow: var(--shadow); transition: all .3s; position: relative; overflow: hidden;
+        }
+        .subj-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+            background: linear-gradient(90deg, var(--rose), var(--violet));
+        }
+        .subj-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-h); }
+        .subj-icon {
+            width: 56px; height: 56px; border-radius: 16px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 18px; color: #fff; font-size: 1.4rem;
+            box-shadow: 0 8px 20px rgba(232,41,91,.25);
+        }
+        .subj-card h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+        .subj-card p  { color: var(--mid); font-size: .9rem; line-height: 1.7; margin-bottom: 16px; }
+        .grade-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+        .grade-tag {
+            padding: 4px 12px; background: rgba(232,41,91,.08);
+            border-radius: 20px; font-size: .78rem; color: var(--rose); font-weight: 600;
+            border: 1px solid rgba(232,41,91,.15);
+        }
+
+        /* ── CLASS INFO ── */
+        .classinfo-section { background: var(--white); }
+        .classinfo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 52px; }
+        .ci-card {
+            background: var(--soft); border-radius: var(--radius); padding: 36px 28px;
+            text-align: center; border: 1px solid #ece9e4; transition: all .3s;
+        }
+        .ci-card:hover { background: var(--white); box-shadow: var(--shadow); transform: translateY(-5px); }
+        .ci-icon {
+            width: 68px; height: 68px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 18px; color: #fff; font-size: 1.7rem;
+            box-shadow: 0 10px 28px rgba(232,41,91,.28);
+        }
+        .ci-num {
+            font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            line-height: 1; margin-bottom: 8px;
+        }
+        .ci-lbl { font-size: 1rem; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+        .ci-desc { font-size: .85rem; color: var(--mid); }
+
+        /* ── CTA BANNER ── */
+        .cta-section { background: var(--dark); padding: 88px 40px; text-align: center; }
+        .cta-inner { max-width: 680px; margin: 0 auto; }
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: #fff; margin-bottom: 16px;
+        }
+        .cta-section h2 span { color: var(--rose); }
+        .cta-section p { color: rgba(255,255,255,.65); font-size: 1rem; margin-bottom: 32px; line-height: 1.75; }
+        .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+        .btn-cta-w {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 36px; background: var(--rose); color: #fff;
+            border-radius: 40px; text-decoration: none; font-weight: 700; font-size: .95rem; transition: all .25s;
+        }
+        .btn-cta-w:hover { background: var(--rose-dk); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(232,41,91,.4); }
+        .btn-cta-outline {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 15px 36px; background: transparent;
+            border: 2px solid rgba(255,255,255,.4); color: #fff;
+            border-radius: 40px; text-decoration: none; font-weight: 700; font-size: .95rem; transition: all .25s;
+        }
+        .btn-cta-outline:hover { background: #fff; color: var(--rose); border-color: #fff; }
+
+        /* ── FOOTER ── */
+        .footer { background: #f9f7f5; border-top: 1px solid #eee; padding: 72px 40px 0; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; max-width: 1200px; margin: 0 auto; }
+        .footer h4 {
+            font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700;
+            color: var(--dark); margin-bottom: 20px; padding-bottom: 10px;
+            display: inline-block; border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, var(--rose), var(--violet)) 1;
+        }
+        .footer ul { list-style: none; }
+        .footer ul li { margin-bottom: 10px; }
+        .footer ul li a {
+            color: var(--mid); text-decoration: none; font-size: .9rem;
+            display: flex; align-items: center; gap: 8px; transition: all .2s;
+        }
+        .footer ul li a i { color: var(--rose); font-size: .72rem; }
+        .footer ul li a:hover { color: var(--rose); padding-left: 4px; }
+        .fcontact-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+        .ficon {
+            width: 36px; height: 36px; min-width: 36px; border-radius: 10px;
+            background: linear-gradient(135deg, var(--rose), var(--violet));
+            display: flex; align-items: center; justify-content: center; color: #fff; font-size: .8rem;
+        }
+        .fcontact-item a, .fcontact-item span {
+            color: var(--mid); font-size: .88rem; text-decoration: none; line-height: 1.5; display: block;
+        }
+        .fcontact-item a:hover { color: var(--rose); }
+        .footer-bottom {
+            max-width: 1200px; margin: 40px auto 0;
+            border-top: 1px solid #e5e7eb; padding: 24px 0;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+        }
+        .footer-bottom p { font-size: .82rem; color: #9ca3af; }
+        .footer-bottom a { color: var(--rose); text-decoration: none; }
+
+        /* ── BACK TO TOP ── */
+        .back-to-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 46px; height: 46px; background: var(--rose); color: #fff;
+            border-radius: 50%; display: none; align-items: center; justify-content: center;
+            font-size: .9rem; text-decoration: none;
+            box-shadow: 0 8px 24px rgba(232,41,91,.4); z-index: 200; transition: all .25s;
+        }
+        .back-to-top:hover { background: var(--rose-dk); transform: translateY(-3px); }
+        .back-to-top.show { display: flex; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) {
+            .grade-grid { grid-template-columns: repeat(2, 1fr); }
+            .curr-grid  { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 900px) {
+            .subjects-grid { grid-template-columns: repeat(2, 1fr); }
+            .classinfo-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline { gap: 12px; }
+            .timeline::before { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            section { padding: 56px 20px; }
+            .topbar { display: none; }
+            .navbar { padding: 0 16px; position: sticky; top: 0; z-index: 100; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); padding: 16px; box-shadow: 0 8px 24px rgba(0,0,0,.1); z-index: 999; }
+            .nav-links.open { display: flex; }
+            .hamburger { display: flex; }
+            .grade-grid { grid-template-columns: 1fr; }
+            .curr-grid  { grid-template-columns: 1fr; }
+            .subjects-grid { grid-template-columns: 1fr; }
+            .classinfo-grid { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+            .cta-btns { flex-direction: column; align-items: center; }
+            .timeline-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+            .filter-nav { gap: 8px; }
+            .cta-section { padding: 60px 20px; }
+        }
+        @media (max-width: 480px) {
+            section { padding: 48px 16px; }
+            .container { padding: 0; }
+            .navbar { padding: 0 14px; }
+            .page-hero h1 { font-size: 2rem; }
+            .cta-section { padding: 48px 16px; }
+            .filter-nav button { font-size: 0.8rem; padding: 7px 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Spinner -->
+<div id="spinner"><div class="spin-ring"></div></div>
+
+<!-- Topbar -->
+<div class="topbar">
+    <div class="topbar-info">
+        <a href="#"><i class="fas fa-map-marker-alt"></i> Mtora Stands, Gokwe North</a>
+        <a href="/cdn-cgi/l/email-protection#c9ada6a4a0a7a0a6a7adacbabda0a7b089aea4a8a0a5e7aaa6a4"><i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="6c080301050205030208091f180502152c0b010d0500420f0301">[email&#160;protected]</span></a>
+        <a href="tel:+263783796279"><i class="fas fa-phone-alt"></i> +(263) 78 379 6279</a>
+    </div>
+    <div class="topbar-social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <a href="index.html" class="nav-brand">
+        <img src="img/dominionlogo.jpg" alt="Dominion Destiny Logo">
+        <div>
+            <div class="brand-name">Dominion Destiny</div>
+            <div class="brand-sub">Primary School</div>
+        </div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="service.html">Services</a></li>
+        <li><a href="program.html" class="active">Programs</a></li>
+        <li><a href="event.html">Events</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px;">
+        <a href="tel:+263783796279" class="btn-call"><i class="fas fa-headset"></i> Call Us</a>
+        <div class="hamburger" id="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<div class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+        <div class="hero-eyebrow"><i class="fas fa-graduation-cap"></i> ECD to Grade 7</div>
+        <h1>Academic <em>Programs</em></h1>
+        <nav class="breadcrumb">
+            <a href="index.html">Home</a>
+            <span class="sep">/</span>
+            <a href="#">Pages</a>
+            <span class="sep">/</span>
+            <span class="current">Programs</span>
+        </nav>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — Grade Level Cards
+════════════════════════════════════════════ -->
+<section class="programs-section">
+    <div class="container">
+        <div style="text-align:center; max-width:680px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-book-open"></i> Our Curriculum</div>
+            <h2 class="section-heading">Complete <span>Learning Journey</span></h2>
+            <p class="section-sub">From Early Childhood Development to Grade 7, we provide a comprehensive education that nurtures young minds, builds character, and prepares students for success.</p>
+        </div>
+
+        <!-- Filter Nav -->
+        <div class="filter-nav">
+            <button class="filter-btn active" data-filter="all">All Levels</button>
+            <button class="filter-btn" data-filter="ecd">ECD</button>
+            <button class="filter-btn" data-filter="infant">Infant (Gr 1–2)</button>
+            <button class="filter-btn" data-filter="junior">Junior (Gr 3–4)</button>
+            <button class="filter-btn" data-filter="senior">Senior (Gr 5–7)</button>
+        </div>
+
+        <!-- Grade Cards -->
+        <div class="grade-grid" id="gradeGrid">
+
+            <!-- ECD -->
+            <div class="grade-card" data-grade="ecd">
+                <div class="gc-header ecd">
+                    <div class="gc-num">ECD</div>
+                    <div class="gc-lbl">Early Childhood</div>
+                    <div class="gc-bg-icon"><i class="fas fa-child"></i></div>
+                </div>
+                <div class="gc-body">
+                    <span class="gc-age">Ages 3–5 Years</span>
+                    <ul class="gc-features">
+                        <li><i class="fas fa-check-circle"></i> Play-based Learning</li>
+                        <li><i class="fas fa-check-circle"></i> Social & Emotional Development</li>
+                        <li><i class="fas fa-check-circle"></i> Early Literacy & Numeracy</li>
+                        <li><i class="fas fa-check-circle"></i> Creative Expression</li>
+                        <li><i class="fas fa-check-circle"></i> Motor Skills Development</li>
+                    </ul>
+                    <a href="#" class="btn-grade"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Grade 1–2 -->
+            <div class="grade-card" data-grade="infant">
+                <div class="gc-header infant">
+                    <div class="gc-num">1–2</div>
+                    <div class="gc-lbl">Infant Level</div>
+                    <div class="gc-bg-icon"><i class="fas fa-pencil-alt"></i></div>
+                </div>
+                <div class="gc-body">
+                    <span class="gc-age">Ages 6–7 Years</span>
+                    <ul class="gc-features">
+                        <li><i class="fas fa-check-circle"></i> Reading & Writing Foundations</li>
+                        <li><i class="fas fa-check-circle"></i> Basic Mathematics</li>
+                        <li><i class="fas fa-check-circle"></i> Environmental Science</li>
+                        <li><i class="fas fa-check-circle"></i> Creative Arts</li>
+                        <li><i class="fas fa-check-circle"></i> Physical Education</li>
+                    </ul>
+                    <a href="#" class="btn-grade"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Grade 3–4 -->
+            <div class="grade-card" data-grade="junior">
+                <div class="gc-header junior">
+                    <div class="gc-num">3–4</div>
+                    <div class="gc-lbl">Junior Level</div>
+                    <div class="gc-bg-icon"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="gc-body">
+                    <span class="gc-age">Ages 8–9 Years</span>
+                    <ul class="gc-features">
+                        <li><i class="fas fa-check-circle"></i> Advanced Literacy</li>
+                        <li><i class="fas fa-check-circle"></i> Mathematics & Problem Solving</li>
+                        <li><i class="fas fa-check-circle"></i> Introduction to Science</li>
+                        <li><i class="fas fa-check-circle"></i> Social Studies</li>
+                        <li><i class="fas fa-check-circle"></i> Computer Literacy</li>
+                    </ul>
+                    <a href="#" class="btn-grade"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Grade 5–7 -->
+            <div class="grade-card" data-grade="senior">
+                <div class="gc-header senior">
+                    <div class="gc-num">5–7</div>
+                    <div class="gc-lbl">Senior Level</div>
+                    <div class="gc-bg-icon"><i class="fas fa-flask"></i></div>
+                </div>
+                <div class="gc-body">
+                    <span class="gc-age">Ages 10–12 Years</span>
+                    <ul class="gc-features">
+                        <li><i class="fas fa-check-circle"></i> Advanced Mathematics</li>
+                        <li><i class="fas fa-check-circle"></i> Integrated Science</li>
+                        <li><i class="fas fa-check-circle"></i> English & Literature</li>
+                        <li><i class="fas fa-check-circle"></i> History & Geography</li>
+                        <li><i class="fas fa-check-circle"></i> Examination Preparation</li>
+                    </ul>
+                    <a href="#" class="btn-grade"><span>Learn More</span><i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — Learning Path Timeline
+════════════════════════════════════════════ -->
+<section class="timeline-section">
+    <div class="container">
+        <div style="text-align:center; max-width:640px; margin:0 auto 48px;">
+            <div class="section-tag"><i class="fas fa-route"></i> Learning Path</div>
+            <h2 class="section-heading">Your Child's <span>Journey With Us</span></h2>
+        </div>
+        <div class="timeline-wrap">
+            <h3 class="tl-title">From First Steps to Grade 7 Mastery</h3>
+            <div class="timeline">
+                <div class="tl-node">
+                    <div class="tl-bubble active">
+                        <span class="tl-grade">ECD</span>
+                        <span class="tl-age">3–5 yrs</span>
+                    </div>
+                    <div class="tl-label">Foundation</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 1</span>
+                        <span class="tl-age">6 yrs</span>
+                    </div>
+                    <div class="tl-label">Discovery</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 2</span>
+                        <span class="tl-age">7 yrs</span>
+                    </div>
+                    <div class="tl-label">Building</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 3</span>
+                        <span class="tl-age">8 yrs</span>
+                    </div>
+                    <div class="tl-label">Exploration</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 4</span>
+                        <span class="tl-age">9 yrs</span>
+                    </div>
+                    <div class="tl-label">Growth</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 5</span>
+                        <span class="tl-age">10 yrs</span>
+                    </div>
+                    <div class="tl-label">Deepening</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 6</span>
+                        <span class="tl-age">11 yrs</span>
+                    </div>
+                    <div class="tl-label">Advancing</div>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-bubble">
+                        <span class="tl-grade">Gr 7</span>
+                        <span class="tl-age">12 yrs</span>
+                    </div>
+                    <div class="tl-label">Mastery</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — Curriculum Overview
+════════════════════════════════════════════ -->
+<section class="curriculum-section">
+    <div class="container">
+        <div style="text-align:center; max-width:640px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-layer-group"></i> What We Teach</div>
+            <h2 class="section-heading">Our Comprehensive <span>Curriculum</span></h2>
+            <p class="section-sub">Designed to develop well-rounded, confident, and capable learners at every stage.</p>
+        </div>
+        <div class="curr-grid">
+            <div class="curr-card">
+                <div class="curr-icon"><i class="fas fa-book"></i></div>
+                <h4>Literacy</h4>
+                <p>Reading, writing, speaking, and listening skills developed progressively across all grade levels.</p>
+            </div>
+            <div class="curr-card">
+                <div class="curr-icon"><i class="fas fa-calculator"></i></div>
+                <h4>Numeracy</h4>
+                <p>Mathematical thinking, problem-solving, and logical reasoning from basic counting to algebra.</p>
+            </div>
+            <div class="curr-card">
+                <div class="curr-icon"><i class="fas fa-flask"></i></div>
+                <h4>Science</h4>
+                <p>Hands-on exploration of the natural world, biology, chemistry, and applied science concepts.</p>
+            </div>
+            <div class="curr-card">
+                <div class="curr-icon"><i class="fas fa-globe-africa"></i></div>
+                <h4>Social Studies</h4>
+                <p>Understanding community, country, history, geography, and global citizenship.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — Subject Showcase
+════════════════════════════════════════════ -->
+<section class="subjects-section">
+    <div class="container">
+        <div style="text-align:center; max-width:640px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-chalkboard"></i> Subject Areas</div>
+            <h2 class="section-heading">Every Subject, <span>Every Skill</span></h2>
+            <p class="section-sub">A broad and balanced programme ensuring no child is left behind and every talent is discovered.</p>
+        </div>
+        <div class="subjects-grid">
+            <div class="subj-card">
+                <div class="subj-icon"><i class="fas fa-language"></i></div>
+                <h4>Languages</h4>
+                <p>English, Shona, and Ndebele language instruction to promote multilingualism and cultural appreciation.</p>
+                <div class="grade-tags"><span class="grade-tag">ECD – Gr 7</span><span class="grade-tag">All Levels</span></div>
+            </div>
+            <div class="subj-card">
+                <div class="subj-icon"><i class="fas fa-calculator"></i></div>
+                <h4>Mathematics</h4>
+                <p>From basic counting to advanced problem-solving, building strong mathematical foundations for life.</p>
+                <div class="grade-tags"><span class="grade-tag">ECD – Gr 7</span><span class="grade-tag">Core Subject</span></div>
+            </div>
+            <div class="subj-card">
+                <div class="subj-icon"><i class="fas fa-leaf"></i></div>
+                <h4>Science &amp; Technology</h4>
+                <p>Biology, chemistry, physics, and an introduction to computer skills and ICT for the modern world.</p>
+                <div class="grade-tags"><span class="grade-tag">Gr 3–7</span><span class="grade-tag">Hands-on</span></div>
+            </div>
+            <div class="subj-card">
+                <div class="subj-icon"><i class="fas fa-paint-brush"></i></div>
+                <h4>Creative Arts</h4>
+                <p>Art, music, drama, and dance to foster creativity, self-expression, and confidence in every child.</p>
+                <div class="grade-tags"><span class="grade-tag">ECD – Gr 7</span><span class="grade-tag">All Levels</span></div>
+            </div>
+            <div class="subj-card">
+                <div class="subj-icon"><i class="fas fa-running"></i></div>
+                <h4>Physical Education</h4>
+                <p>Sports, games, and fitness activities that promote healthy, active lifestyles and team spirit.</p>
+                <div class="grade-tags"><span class="grade-tag">ECD – Gr 7</span><span class="grade-tag">Weekly</span></div>
+            </div>
+            <div class="subj-card">
+                <div class="subj-icon"><i class="fas fa-heart"></i></div>
+                <h4>Life Skills</h4>
+                <p>Values education, personal development, and social responsibility shaping future leaders.</p>
+                <div class="grade-tags"><span class="grade-tag">ECD – Gr 7</span><span class="grade-tag">Character Building</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — Class Information
+════════════════════════════════════════════ -->
+<section class="classinfo-section">
+    <div class="container">
+        <div style="text-align:center; max-width:620px; margin:0 auto;">
+            <div class="section-tag"><i class="fas fa-users"></i> Class Structure</div>
+            <h2 class="section-heading">Small Classes, <span>Big Impact</span></h2>
+            <p class="section-sub">Our class structure is deliberately designed to maximise individual attention and genuine learning.</p>
+        </div>
+        <div class="classinfo-grid">
+            <div class="ci-card">
+                <div class="ci-icon"><i class="fas fa-users"></i></div>
+                <div class="ci-num">25</div>
+                <div class="ci-lbl">Max Class Size</div>
+                <p class="ci-desc">Small classes ensure every child receives individual attention and support.</p>
+            </div>
+            <div class="ci-card">
+                <div class="ci-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                <div class="ci-num">1:15</div>
+                <div class="ci-lbl">Teacher Ratio</div>
+                <p class="ci-desc">Optimal teacher-to-student ratio for meaningful interaction and feedback.</p>
+            </div>
+            <div class="ci-card">
+                <div class="ci-icon"><i class="fas fa-clock"></i></div>
+                <div class="ci-num">7</div>
+                <div class="ci-lbl">Hours Daily</div>
+                <p class="ci-desc">A structured full school day balancing academics, play, and enrichment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CTA BANNER
+════════════════════════════════════════════ -->
+<div class="cta-section">
+    <div class="cta-inner">
+        <h2>Ready to Start the <span>Journey?</span></h2>
+        <p>Enrol your child today and give them the gift of quality education from ECD all the way to Grade 7. Spaces are limited — act now.</p>
+        <div class="cta-btns">
+            <a href="contact.html" class="btn-cta-w"><i class="fas fa-file-alt"></i><span>Apply Now</span></a>
+            <a href="contact.html" class="btn-cta-outline"><i class="fas fa-calendar-alt"></i><span>Schedule a Tour</span></a>
+        </div>
+    </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<div class="footer">
+    <div class="footer-grid">
+        <div>
+            <h4>Admissions</h4>
+            <ul>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Admissions Process</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Fees Structure</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Tour Booking</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Online Application</a></li>
+                <li><a href="#"><i class="fas fa-chevron-right"></i> Uniform Shop</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-chevron-right"></i> About</a></li>
+                <li><a href="service.html"><i class="fas fa-chevron-right"></i> Services &amp; Facilities</a></li>
+                <li><a href="program.html"><i class="fas fa-chevron-right"></i> Programs</a></li>
+                <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Contacts</h4>
+            <div class="fcontact-item">
+                <div class="ficon"><i class="fas fa-phone-alt"></i></div>
+                <div>
+                    <a href="tel:+263783796279">+(263) 78 379 6279</a>
+                    <a href="tel:+263779756175">+(263) 77 975 6175</a>
+                </div>
+            </div>
+            <div class="fcontact-item">
+                <div class="ficon"><i class="fas fa-envelope"></i></div>
+                <div><a href="/cdn-cgi/l/email-protection#3652595b5f585f5958525345425f584f76515b575f5a1855595b"><span class="__cf_email__" data-cfemail="99fdf6f4f0f7f0f6f7fdfceaedf0f7e0d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a></div>
+            </div>
+            <div class="fcontact-item">
+                <div class="ficon"><i class="fas fa-map-marker-alt"></i></div>
+                <div>
+                    <span>Mtora Stands, Gokwe North</span>
+                    <span>Nembudziya, ZIMBABWE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Dominion Academy. All Rights Reserved.</p>
+        <p>Designed by <a href="tel:+263786980823">Ain-Graphix +(263) 78 698 0823</a></p>
+    </div>
+</div>
+
+<!-- Back to Top -->
+<a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Spinner
+    window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('spinner').classList.add('hide'), 300);
+    });
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Back to top
+    const btt = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 300));
+    btt.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+    // Grade filter
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const gradeCards = document.querySelectorAll('.grade-card');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            gradeCards.forEach(card => {
+                if (filter === 'all' || card.dataset.grade === filter) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeUp .4s ease both';
+                } else {
+                    card.style.
